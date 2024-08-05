@@ -1,0 +1,48 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import {
+  createBrowserRouter,
+  RouterProvider
+} from "react-router-dom";
+import App from './App.jsx';
+import './index.css';
+import Bisection from './page/Bisection.jsx';
+import Graphical from './page/Graphical.jsx';
+import Home from './page/Home.jsx';
+import Registering from './page/register.jsx';
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App/>,
+    children: [
+    {
+      path: "Home",
+      element: <Home/>,
+      children: [
+      {
+        
+        path: "Rootequation",
+        element: <Graphical/>,
+        
+      },
+      {
+      path: "REGISTER",
+      element: <Registering/>
+    },
+    {
+      path: "Bisection",
+      element: <Bisection/>
+    }
+
+    ]
+  }
+  ]
+  },
+  
+
+])
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <RouterProvider router={router}/>
+  </React.StrictMode>,
+)
