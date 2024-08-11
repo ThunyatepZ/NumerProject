@@ -6,7 +6,14 @@ const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const conectDB = require('./Models/config/db')
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json')
+//const swaggerAutogen = require('./Swagger');
+
 conectDB()
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(morgan('dev'))
 app.use(cors())
 app.use(bodyParser.json({ limit: '10mb' }))

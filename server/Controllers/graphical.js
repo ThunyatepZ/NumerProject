@@ -8,3 +8,11 @@ exports.Bisection = async(req,res)=>{
         console.log(err)
     }
 }
+
+exports.testswagger = async(req,res)=>{
+    try{
+        res.send("Hello");
+    }catch(err){
+        console.log(err)
+    }
+}
