@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import MathEquation from '../component/Boxmath';
 import Graphishow from '../component/graph';
 import Submenuroot from '../component/submenu.root';
-const postBIS = "http://localhost:5000/api/bisec"
+const postFalse = "http://localhost:5000/api/Falseposition"
 
 function Graphical() {
     const [FX,setFX] = useState("")
@@ -52,7 +52,7 @@ function Graphical() {
 
         //console.log(form)
 
-        await axios.post(postBIS,form
+        await axios.post(postFalse,form
             
         ).then((res)=>{
             SetANS(res.data)
@@ -70,7 +70,7 @@ return (
     <div className='bg-base-100'>
     
     <div className='text-center text-3xl'>
-        <h1 className='text-white pt-10 pb-5'>Graphical Method : Bisection</h1>
+        <h1 className='text-white pt-10 pb-5'>Graphical Method : Falseposition</h1>
         <div className="divider divider-neutral"></div>
         
     </div>
@@ -92,7 +92,7 @@ return (
 
         </div>
         <div className='text-center'>
-        <br />Anser is: {ANS}<br/>
+        <br />{ANS}<br/>
         </div>
 
         <div className='text-center'>

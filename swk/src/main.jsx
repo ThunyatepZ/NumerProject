@@ -7,14 +7,17 @@ import {
 import App from './App.jsx';
 import './index.css';
 import Bisection from './page/Bisection.jsx';
+import Falsepositionpg from './page/falsepositionpg.jsx';
 import Graphical from './page/Graphical.jsx';
 import Home from './page/Home.jsx';
+import Onepointiter from './page/Onepoint.jsx';
 import Registering from './page/register.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
     children: [
+
     {
       path: "Home",
       element: <Home/>,
@@ -23,7 +26,6 @@ const router = createBrowserRouter([
         
         path: "Rootequation",
         element: <Graphical/>,
-        
       },
       {
       path: "REGISTER",
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
     {
       path: "Bisection",
       element: <Bisection/>
+    },
+    {
+      path: "FalsePosition",
+      element: <Falsepositionpg/>
+    },
+    {
+      path: "Onepoint",
+      element: <Onepointiter/>
     }
 
     ]

@@ -34,8 +34,8 @@ function Submenuroot() {
         >
           <MenuItem onClick={handleClose}><Link to="/Home/Rootequation">Graphical Method</Link></MenuItem>
           <MenuItem onClick={handleClose}><Link to="/Home/Bisection">Bisection method</Link></MenuItem>
-          <MenuItem onClick={handleClose}>False-position Method</MenuItem>
-          <MenuItem onClick={handleClose}>One-point iteration method</MenuItem>
+          <MenuItem onClick={handleClose}><Link to={"/Home/FalsePosition"}>False-position Method</Link></MenuItem>
+          <MenuItem onClick={handleClose}><Link to={"/Home/Onepoint"}>One-point iteration method</Link></MenuItem>
           <MenuItem onClick={handleClose}>Newton-Raphson Method</MenuItem>
           <MenuItem onClick={handleClose}>Secant Method</MenuItem>
         </Menu>

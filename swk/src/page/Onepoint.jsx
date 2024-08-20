@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import MathEquation from '../component/Boxmath';
 import Graphishow from '../component/graph';
 import Submenuroot from '../component/submenu.root';
-const postBIS = "http://localhost:5000/api/bisec"
+const postOne = "http://localhost:5000/api/Onepoint"
 
 function Graphical() {
     const [FX,setFX] = useState("")
@@ -11,9 +11,8 @@ function Graphical() {
     const [Xend,setXend] = useState("")
     const [Error,setError] = useState("")
     const [form,setform] = useState({})
-    const [name , Setname] = useState(null)
     const equation = 'f(x) = ';
-    const [er,seter] = useState("");
+
 
     const FXchange = ({target: {value}}) =>{
         console.log(value)
@@ -52,7 +51,7 @@ function Graphical() {
 
         //console.log(form)
 
-        await axios.post(postBIS,form
+        await axios.post(postOne,form
             
         ).then((res)=>{
             SetANS(res.data)
@@ -61,8 +60,9 @@ function Graphical() {
 
     }
 
-    
-    
+    if( ANS == null){
+        SetANS("NULL")
+    }
 
 
 
@@ -70,7 +70,7 @@ return (
     <div className='bg-base-100'>
     
     <div className='text-center text-3xl'>
-        <h1 className='text-white pt-10 pb-5'>Graphical Method : Bisection</h1>
+        <h1 className='text-white pt-10 pb-5'>Graphical Method : Onepoint</h1>
         <div className="divider divider-neutral"></div>
         
     </div>
@@ -83,8 +83,7 @@ return (
         <form onSubmit={handlesubmit}>
         <input type="text" name='equation' className='text-center bg-white py-3 mr-4 text-black rounded-md' onChange={(e)=> {
             handlechangeforequation(e) , handlechange(e)}} placeholder='f(x) = 4x-32'/><br />
-        <input type="text" name='Xstart' className='text-center bg-white py-3 mt-2 mr-4 text-black rounded-md' onChange={(e)=> handlechange(e)} placeholder='Xstart'/>
-        <input type="text" name='Xend' className='text-center bg-white py-3 mr-4 text-black rounded-md' onChange={(e)=> handlechange(e)} placeholder='Xend'/>
+        <input type="text" name='Xstart' className='text-center bg-white py-3 mt-2 mr-4 text-black rounded-md' onChange={(e)=> handlechange(e)} placeholder='X'/>
         <input type="text" name='Error' className='text-center bg-white py-3 mt-2 mr-4 text-black rounded-md' onChange={(e)=> handlechange(e)} placeholder='Error'/>
         <br /><button type='submit' className='bg-green-400 text-black p-3 rounded mt-3'>send</button>
         </form>
@@ -92,7 +91,8 @@ return (
 
         </div>
         <div className='text-center'>
-        <br />Anser is: {ANS}<br/>
+        <br />Anser is : {ANS}<br/>
+        
         </div>
 
         <div className='text-center'>
