@@ -73,7 +73,7 @@ function Graphical() {
 
 
 return (
-    <div className='bg-base-100'>
+    <div className=''>
     
     <div className='text-center text-3xl'>
         <h1 className='text-white pt-10 pb-5'>Graphical Method : Bisection</h1>

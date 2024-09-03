@@ -9,7 +9,7 @@ export default {
     extend: {},
   },
   daisyui:{
-    base: true,
+    base: false,
 
   },
   plugins: [require('daisyui'),],
