@@ -15,5 +15,6 @@ for(let i = 0;i < 3;i++){
         }
     }
     console.log(math.det(x)/math.det(A))
+    console.log(math.det(A))
 }
 // console.log(A)

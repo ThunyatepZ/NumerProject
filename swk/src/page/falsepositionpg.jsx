@@ -1,9 +1,9 @@
-import axios from 'axios';
 import React, { useState } from 'react';
+import Falseposition from '../CalculateFornt/Flaseposition.js';
 import MathEquation from '../component/Boxmath';
 import Graphishow from '../component/graph';
 import Submenuroot from '../component/submenu.root';
-const postFalse = "http://localhost:5000/api/Falseposition"
+// const postFalse = "http://localhost:5000/api/Falseposition"
 
 function Graphical() {
     const [FX,setFX] = useState("")
@@ -13,7 +13,7 @@ function Graphical() {
     const [form,setform] = useState({})
     const [name , Setname] = useState(null)
     const equation = 'f(x) = ';
-    const [er,seter] = useState("");
+    const [resive,setresive] = useState("");
 
     const FXchange = ({target: {value}}) =>{
         console.log(value)
@@ -49,15 +49,15 @@ function Graphical() {
     const handlesubmit = async(e)=>{
 
         e.preventDefault()
-
+        const l = Falseposition(form)
         //console.log(form)
-
-        await axios.post(postFalse,form
+        setresive(l)
+        // await axios.post(postFalse,form
             
-        ).then((res)=>{
-            SetANS(res.data)
-            console.log(res.data)
-        })
+        // ).then((res)=>{
+        //     SetANS(res.data)
+        //     console.log(res.data)
+        // })
 
     }
 
@@ -92,7 +92,7 @@ return (
 
         </div>
         <div className='text-center'>
-        <br />{ANS}<br/>
+        <br />{resive}<br/>
         </div>
 
         <div className='text-center'>

@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useState } from 'react';
+import Onepointiter from '../CalculateFornt/Onepointer';
 import MathEquation from '../component/Boxmath';
 import Graphishow from '../component/graph';
 import Submenuroot from '../component/submenu.root';
@@ -12,25 +12,7 @@ function Graphical() {
     const [Error,setError] = useState("")
     const [form,setform] = useState({})
     const equation = 'f(x) = ';
-
-
-    const FXchange = ({target: {value}}) =>{
-        console.log(value)
-        setFX(value)
-    }
-    const XstartChange = ({target: {value}}) =>{
-        console.log(value)
-        setXstart(value)
-    }
-    const Xendchange = ({target: {value}}) =>{
-        console.log(value)
-        setXend(value)
-    }
-    const Errorchange = ({target: {value}}) =>{
-        console.log(value)
-        setError(value)
-    }
-    const [ANS,SetANS] = useState()
+    const [anser,seranser] = useState("")
     
 
     const handlechangeforequation = (e) =>{
@@ -48,21 +30,22 @@ function Graphical() {
     const handlesubmit = async(e)=>{
 
         e.preventDefault()
-
+        let O = Onepointiter(form)
+        seranser(O)
         //console.log(form)
 
-        await axios.post(postOne,form
+        // await axios.post(postOne,form
             
-        ).then((res)=>{
-            SetANS(res.data)
-            console.log(res.data)
-        })
+        // ).then((res)=>{
+        //     SetANS(res.data)
+        //     console.log(res.data)
+        // })
 
     }
 
-    if( ANS == null){
-        SetANS("NULL")
-    }
+    // if( ANS == null){
+    //     SetANS("NULL")
+    // }
 
 
 
@@ -91,7 +74,7 @@ return (
 
         </div>
         <div className='text-center'>
-        <br />Anser is : {ANS}<br/>
+        <br />Anser is : {anser}<br/>
         
         </div>
 

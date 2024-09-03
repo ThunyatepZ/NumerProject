@@ -25,16 +25,16 @@ module.exports = BIS = ({Xstart,Xend,Error,equation}) =>{
             fnXR = find_function(XR)
             if(fnXM * fnXR > 0){
                 XR = XM
-                findError = Math.abs((XR- XMO))
+                findError = math.abs((XR- XMO))
             }else{
                 XL = XM
-                findError = Math.abs((XL - XMO))
+                findError = math.abs((XL - XMO))
 
             }if(findError < parseFloat(Error)){
                 return XM.toFixed(6)
             }
             else{
-                console.log(findError, fnXM, fnXR)
+                console.log(XM)
             }
         }
     }

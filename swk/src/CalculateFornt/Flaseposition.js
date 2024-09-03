@@ -1,16 +1,18 @@
-module.exports = Falseposition = ({Xstart,Xend,Error,equation})=>{
-    const math = require('mathjs')
-    let scope
+import { all, create } from 'mathjs';
+const math = create(all)
+export default function Falseposition ({Xstart,Xend,Error,equation}){
     
+    let scope
     if(!Error || !Xstart || !Xend || !equation){
-
+        alert("Please input")
+        return 1
     }
     else{
         function find_function(x){
             let fxm = math.evaluate(equation,scope);
             return fxm
         }
-    
+
         let XL = parseFloat(Xstart)
         let XR = parseFloat(Xend)
         let X1_old,x1=0,error
@@ -38,9 +40,10 @@ module.exports = Falseposition = ({Xstart,Xend,Error,equation})=>{
                 return x1.toFixed(6);
             }
             else{
-                console.log(error)
+                console.log(x1)
             }
         }
+        
     }
     
 }

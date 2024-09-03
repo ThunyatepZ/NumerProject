@@ -15,7 +15,6 @@ function Lobbie() {
         </li>
       </ul>
 
-     
       </div>
     </div>
   )

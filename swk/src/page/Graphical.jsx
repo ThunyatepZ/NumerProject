@@ -1,9 +1,12 @@
-import axios from 'axios';
+import { all, create } from 'mathjs';
 import React, { useState } from 'react';
+import GraphicalJS from '../CalculateFornt/Graphical';
 import MathEquation from '../component/Boxmath';
 import Graphishow from '../component/graph';
 import Submenuroot from '../component/submenu.root';
-const postGPC = "http://localhost:3000/api/GraphicalMTD/Post"
+import BasicTable from '../component/Table';
+const math = create(all)
+// const postGPC = "http://localhost:3000/api/GraphicalMTD/Post"
 
 function Graphical() {
     const [FX,setFX] = useState("")
@@ -11,7 +14,7 @@ function Graphical() {
     const [Xend,setXend] = useState("")
     const [Error,setError] = useState("")
     const [form,setform] = useState({})
-    const [name , Setname] = useState(null)
+    const [name , Setname] = useState("Anser")
     const equation = 'f(x) = ';
 
     const FXchange = ({target: {value}}) =>{
@@ -48,13 +51,16 @@ function Graphical() {
     const handlesubmit = async(e)=>{
         e.preventDefault()
         //console.log(form)
-
-        await axios.post(postGPC,form
+        let G = GraphicalJS(form)
+        Setname(G)
+        // Graphishow(name)
+        // BasicTable(name)
+        // await axios.post(postGPC,form
             
-        ).then((res)=>{
-            SetANS(res.data)
-            console.log(res.data)
-        })
+        // ).then((res)=>{
+        //     SetANS(res.data)
+        //     console.log(res.data)
+        // })
 
     }
 
@@ -89,7 +95,8 @@ return (
 
         </div>
         <div className='text-center'>
-        <br />[equation:{ANS.equation} Xstart:{ANS.Xstart} Xend:{ANS.Xend} Error:{ANS.Error}]<br/>
+        {/* <br />[equation:{ANS.equation} Xstart:{ANS.Xstart} Xend:{ANS.Xend} Error:{ANS.Error}]<br/> */}
+        {/* <br />{name.NewAnser}<br/> */}
         </div>
 
         <div className='text-center'>
@@ -97,9 +104,17 @@ return (
         </div>
 
 
-        <div className='flex justify-center'>
-                <Graphishow/>
+        <div className='w-full flex justify-center items-center'>
+            <div className=''>
+            <Graphishow x ={name.xans} y ={name.yans}/>
             </div>
+
+        </div>
+        <div className='w-full flex justify-center items-center mt-10'>
+                <div className='w-[70%]'>
+                    <BasicTable  x={name.xans} y ={name.yans} errorFAC={name.err} iterative={name.it}/>
+                </div>
+        </div>
     </div>
 )
 }

@@ -45,7 +45,7 @@ for(let k = 2; k >= 0;k--){
 
 }
 
-console.log(y)
+console.log(math.round(y,6))
 console.log(math.round(x))
 // console.table(L)
 // console.table(U)

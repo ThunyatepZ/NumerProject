@@ -1,8 +1,9 @@
-import axios from 'axios';
 import React, { useState } from 'react';
+import Bisection101 from '../CalculateFornt/Bis';
 import MathEquation from '../component/Boxmath';
 import Graphishow from '../component/graph';
 import Submenuroot from '../component/submenu.root';
+import BasicTable from '../component/Table';
 const postBIS = "http://localhost:5000/api/bisec"
 
 function Graphical() {
@@ -46,18 +47,23 @@ function Graphical() {
         
     }
 
+    
+
     const handlesubmit = async(e)=>{
 
         e.preventDefault()
-
+        const B = Bisection101(form)
+        seter(B)
+        Graphishow(er)
+        BasicTable(er)
         //console.log(form)
 
-        await axios.post(postBIS,form
+        // await axios.post(postBIS,form
             
-        ).then((res)=>{
-            SetANS(res.data)
-            console.log(res.data)
-        })
+        // ).then((res)=>{
+        //     SetANS(res.data)
+        //     console.log(res.data)
+        // })
 
     }
 
@@ -92,7 +98,7 @@ return (
 
         </div>
         <div className='text-center'>
-        <br />Anser is: {ANS}<br/>
+        <br />Anser is: {er.XM}<br/>
         </div>
 
         <div className='text-center'>
@@ -101,7 +107,13 @@ return (
 
 
         <div className='flex justify-center'>
-                <Graphishow/>
+                <Graphishow x ={er.X} y ={er.Y}/>
+            </div>
+            <div className='w-full flex justify-center items-center mt-10'>
+                <div className='w-[70%]'>
+                <BasicTable x={er.X} y ={er.Y} errorFAC={er.reErr} iterative={er.ITER}/>
+                </div>
+    
             </div>
     </div>
 )
