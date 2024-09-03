@@ -70,14 +70,14 @@ function Graphical() {
 
 
 return (
-    <div className='bg-base-100'>
+    <div className='bg-#1D232A'>
     
     <div className='text-center text-3xl'>
         <h1 className='text-white pt-10 pb-5'>Graphical Method</h1>
         <div className="divider divider-neutral"></div>
         
     </div>
-    <div className='text-center flex justify-center'>
+    <div className='text-center flex justify-center text-white'>
         <MathEquation equation={equation} />
         <MathEquation equation={FX} />
     </div>
@@ -99,7 +99,7 @@ return (
         {/* <br />{name.NewAnser}<br/> */}
         </div>
 
-        <div className='text-center'>
+        <div className='text-center text-white'>
             <Submenuroot/>
         </div>
 

@@ -80,7 +80,7 @@ return (
         <div className="divider divider-neutral"></div>
         
     </div>
-    <div className='text-center flex justify-center'>
+    <div className='text-center flex justify-center text-white'>
         <MathEquation equation={equation} />
         <MathEquation equation={FX} />
     </div>
@@ -97,11 +97,11 @@ return (
 
 
         </div>
-        <div className='text-center'>
+        <div className='text-center text-white'>
         <br />Anser is: {er.XM}<br/>
         </div>
 
-        <div className='text-center'>
+        <div className='text-center text-white'>
             <Submenuroot/>
         </div>
 
