@@ -28,10 +28,8 @@ for(let k = 2; k >= 0;k--){
     sum = 0
     for(let n = 2;n >= 0;n--){
         sum = sum + A[k][n] * x[n]
-        // console.log(sum)
     }
     x[k] = (B[k]-sum) / A[k][k]
-
 }
 
 console.table(A)
