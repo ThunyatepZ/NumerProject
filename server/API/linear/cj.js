@@ -26,8 +26,9 @@ do{
     D = math.add(Rnot1,math.multiply(Alpha,D))
     R = Rnot1
     console.log(iter)
-    console.log(math.round(error,7))
-    console.table(math.round(x,6))
+    console.table(R)
+    break;
+
 
 }while(error > 0.000001)
 
