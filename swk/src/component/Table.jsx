@@ -23,7 +23,7 @@ export default function BasicTable({x, y, errorFAC, iterative}) {
       const x1 = createData(
         math.round(x[i], 6),
         math.round(y[i], 6),
-        math.round(errorFAC[i] * 100, 6),
+        math.round(errorFAC[i], 6),
         math.round(iterative[i], 6)
       );
       i++;

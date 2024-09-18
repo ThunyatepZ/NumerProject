@@ -12,36 +12,64 @@ export default function Falseposition ({Xstart,Xend,Error,equation}){
             let fxm = math.evaluate(equation,scope);
             return fxm
         }
-
+        let Iteration = []
+        let x = [],y = [],errorRe = []
         let XL = parseFloat(Xstart)
         let XR = parseFloat(Xend)
-        let X1_old,x1=0,error
+        let X1_old = 0,finderror
         let fnXR,fnXL,fnX1
-        while(true){
-            X1_old = x1
+        let iter = 0
+        let x1
+        while(1){
+            iter++;
+            
+            Iteration.push(iter)
+
             scope = { x:XL }
             fnXL = parseFloat(find_function(XL))
             scope = { x:XR }
             fnXR = parseFloat(find_function(XR))
+
+            x1 = ((XL * fnXR) - (XR * fnXL)) / (fnXR - fnXL)
+            
             scope = { x:x1 }
-            fnX1 = parseFloat(find_function(x1))
-            x1 = ((XL * fnXR) - (XR * fnXL)) / (fnXR - fnXL);
-            parseFloat(x1)
+            fnX1 = find_function(x1)
+            
+            
+            
+            
             if(fnX1 * fnXR > 0){
                 XR = x1;
-                error = Math.abs(XR - X1_old)
+                finderror = math.abs((XR - X1_old) / XR)
+                errorRe.push(finderror  * 100)
+                X1_old = x1
             }
             else{
                 XL = x1;
-                error = Math.abs(XL - X1_old);
+                finderror = math.abs((XL - X1_old) / XL)
+                errorRe.push(finderror  * 100)
+                X1_old = x1
             }
     
-            if(error < Error){
-                return x1.toFixed(6);
+            if(finderror < parseFloat(Error) || finderror <= parseFloat(Error)){
+                console.log(x)
+                console.log(y)
+                console.log(errorRe)
+
+                return({
+                    X1: math.round(x1,6),
+                    X: x,
+                    Y: y,
+                    RER: errorRe,
+                    ITER: Iteration
+                })
             }
             else{
                 console.log(x1)
+                x.push(x1)
+                y.push(fnX1)
             }
+            
         }
         
     }

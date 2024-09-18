@@ -10,6 +10,7 @@ import Bisection from './page/Bisection.jsx';
 import Falsepositionpg from './page/falsepositionpg.jsx';
 import Graphical from './page/Graphical.jsx';
 import Home from './page/Home.jsx';
+import NEWTONRAPSON from './page/newtonrapyoyo.jsx';
 import Onepointiter from './page/Onepoint.jsx';
 import Registering from './page/register.jsx';
 const router = createBrowserRouter([
@@ -23,7 +24,6 @@ const router = createBrowserRouter([
       element: <Home/>,
       children: [
       {
-        
         path: "Rootequation",
         element: <Graphical/>,
       },
@@ -42,8 +42,11 @@ const router = createBrowserRouter([
     {
       path: "Onepoint",
       element: <Onepointiter/>
+    },
+    {
+      path: "Newtonrapson",
+      element: <NEWTONRAPSON/>
     }
-
     ]
   }
   ]

@@ -31,8 +31,10 @@ export function Graphishow({x,y}) {
           yaxis: {
             title: "Y",
           },
+          dragmode: 'pan',
+          autosize: true,
         }}
-        config={{ scrollZoom: true}}
+        config={{ scrollZoom: true,}}
       />
       
     </div>

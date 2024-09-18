@@ -19,13 +19,13 @@ export default function Bisection101({Xstart,Xend,Error,equation}){
         let iter = 0
         let XL = parseFloat(Xstart)
         let XR = parseFloat(Xend)
-        let XM = 0,XMO
+        let XM,XMO = 0
         let findError
         let fnXR,fnXM
         while(1){
             iter++
             Iteration.push(iter)
-            XMO = XM
+            
             XM =  (XL + XR) / 2.00
             scope = { x:XM }
             fnXM = find_function(XM)
@@ -38,20 +38,21 @@ export default function Bisection101({Xstart,Xend,Error,equation}){
             if(fnXM * fnXR > 0){
                 XR = XM
                 findError = math.abs((XR - XMO) / XR)
-                ErrorRe.push(findError)
+                ErrorRe.push(findError * 100)
+                XMO = XM
                 
             }else{
                 XL = XM
                 findError = math.abs((XL - XMO) / XL)
-                ErrorRe.push(findError)
-
+                ErrorRe.push(findError * 100)
+                XMO = XM
             }if(findError <= parseFloat(Error)){
                 console.log(x)
                 console.log(y)
 
                 console.log(ErrorRe)
                 return ({
-                    XM: XM.toFixed(6),
+                    XM: math.round(XM,6),
                     X: x,
                     Y: y,
                     reErr: ErrorRe,
@@ -60,6 +61,7 @@ export default function Bisection101({Xstart,Xend,Error,equation}){
             }
             else{
                 console.log(XM)
+                
             }
         }
         

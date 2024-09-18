@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import Onepointiter from '../CalculateFornt/Onepointer';
+import Newton from '../CalculateFornt/newtonrapJOJO';
 import MathEquation from '../component/Boxmath';
 import Graphishow from '../component/graph';
 import Submenuroot from '../component/submenu.root';
 import BasicTable from '../component/Table';
-const postOne = "http://localhost:5000/api/Onepoint"
 
-function Graphical() {
+
+function NEWTONRAPSON() {
     const [FX,setFX] = useState("")
     const [form,setform] = useState({})
     const equation = 'f(x) = ';
@@ -28,7 +28,7 @@ function Graphical() {
     const handlesubmit = async(e)=>{
 
         e.preventDefault()
-        let O = Onepointiter(form)
+        let O = Newton(form)
         seranser(O)
 
 
@@ -40,7 +40,7 @@ return (
     <div className='bg-base-100'>
     
     <div className='text-center text-3xl'>
-        <h1 className='text-white pt-10 pb-5'>Graphical Method : Onepoint</h1>
+        <h1 className='text-white pt-10 pb-5'>Graphical Method : Newton raphson</h1>
         <div className="divider divider-neutral"></div>
         
     </div>
@@ -85,4 +85,4 @@ return (
 )
 }
 
-export default Graphical
+export default NEWTONRAPSON
