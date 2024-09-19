@@ -11,7 +11,7 @@ function Lobbie() {
       </h1>
       <ul className="flex">
         <li className="pr-96">
-          <Link to="/Lobby/Rootequation"><button className="bg-teal-300 p-3 rounded-sm text-black" >Getstart</button></Link>
+          <Link to="/Home/Rootequation"><button className="bg-teal-300 p-3 rounded-sm text-black" >Getstart</button></Link>
         </li>
       </ul>
 

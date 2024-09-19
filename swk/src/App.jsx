@@ -9,7 +9,7 @@ export default function App(){
       
       <Routes>
       
-        <Route path="/" element={<Navigate to="/Home" replace />}/>
+        <Route path="/" element={<Navigate to="/Lobby" replace />}/>
       </Routes>
     </>
   )

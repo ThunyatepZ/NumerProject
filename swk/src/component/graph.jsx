@@ -24,7 +24,7 @@ export function Graphishow({x,y}) {
           },
         ]}
         layout={{
-          title: "-",
+          title: "Graph",
           xaxis: {
             title: "X",
           },
