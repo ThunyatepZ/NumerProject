@@ -5,7 +5,7 @@ function Lobbie() {
     
     <div>
         
-      <div className="flex justify-between items-center bg-base-100 py-96">
+      <div className="flex justify-between items-center py-96">
       <h1 className='pl-96 text-3xl'>
         Welcome
       </h1>
