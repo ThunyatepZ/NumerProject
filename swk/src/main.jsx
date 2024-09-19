@@ -11,6 +11,7 @@ import Falsepositionpg from './page/falsepositionpg.jsx';
 import Graphical from './page/Graphical.jsx';
 import Home from './page/Home.jsx';
 import Lobbie from './page/Lobbie.jsx';
+import Logkeeping from './page/Logkeeping.jsx';
 import NEWTONRAPSON from './page/newtonrapyoyo.jsx';
 import Onepointiter from './page/Onepoint.jsx';
 import Registering from './page/register.jsx';
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "Rootequation",
         element: <Graphical/>,
+      },
+      {
+        path: "log",
+        element: <Logkeeping/>
       },
       {
       path: "REGISTER",

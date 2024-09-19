@@ -39,9 +39,9 @@ export default function BasicTable({x, y, errorFAC, iterative}) {
         <TableHead>
           <TableRow>
             <TableCell>Iteration</TableCell>
-            <TableCell align="left">x</TableCell>
+            <TableCell align="left">X</TableCell>
             <TableCell align="left">fx</TableCell>
-            <TableCell align="left">Error</TableCell>
+            <TableCell align="left">Error%</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
