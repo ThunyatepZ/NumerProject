@@ -53,14 +53,9 @@ function Graphical() {
         //console.log(form)
         let G = GraphicalJS(form)
         Setname(G)
-        // Graphishow(name)
-        // BasicTable(name)
-        // await axios.post(postGPC,form
-            
-        // ).then((res)=>{
-        //     SetANS(res.data)
-        //     console.log(res.data)
-        // })
+        name.xans.sort((a,b) => a-b)
+        x.sort((a, b) => a - b);
+        y.sort((a, b) => a - b);
 
     }
 
@@ -73,7 +68,7 @@ return (
     <div className='bg-#1D232A'>
     
     <div className='text-center text-3xl'>
-        <h1 className='text-white pt-10 pb-5'>Graphical Method</h1>
+        <h1 className='text-white pt-10 pb-5'>Root of equation : Graphical Method</h1>
         <div className="divider divider-neutral"></div>
         
     </div>
@@ -105,8 +100,8 @@ return (
 
 
         <div className='w-full flex justify-center items-center'>
-            <div className=''>
-            <Graphishow x ={name.xans} y ={name.yans}/>
+            <div className='App rounded-lg border border-black overflow-hidden'>
+            <Graphishow className='rounded-md border border-black' x ={name.xans} y ={name.yans} check={true}/>
             </div>
 
         </div>

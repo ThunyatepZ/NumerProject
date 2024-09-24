@@ -21,6 +21,7 @@ export default function GraphicalJS({Xstart,Xend,Error,equation}){
     let y,yold = 0,step = 1;
     let iteration = 0
     do{
+        
         keepx.push(x1)
         xold = x1
         scope = {x:x1}
@@ -43,6 +44,7 @@ export default function GraphicalJS({Xstart,Xend,Error,equation}){
 
         anser = x1
         if(error < Error){
+            
             return(
                 {
                     NewAnser: anser,
@@ -63,6 +65,7 @@ export default function GraphicalJS({Xstart,Xend,Error,equation}){
             Keeperror.push(error)
             iteration++
             keepiter.push(iteration)
+            
 
             return(
                 {
@@ -70,7 +73,8 @@ export default function GraphicalJS({Xstart,Xend,Error,equation}){
                     xans: keepx,
                     it: keepiter,
                     yans: keepFX,
-                    err: Keeperror
+                    err: Keeperror,
+                    type: 'Graphical'
 
                 }
             )

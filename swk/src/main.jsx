@@ -10,11 +10,13 @@ import Bisection from './page/Bisection.jsx';
 import Falsepositionpg from './page/falsepositionpg.jsx';
 import Graphical from './page/Graphical.jsx';
 import Home from './page/Home.jsx';
+import LinearAGB101 from './page/LinearAGB.jsx';
 import Lobbie from './page/Lobbie.jsx';
 import Logkeeping from './page/Logkeeping.jsx';
 import NEWTONRAPSON from './page/newtonrapyoyo.jsx';
 import Onepointiter from './page/Onepoint.jsx';
 import Registering from './page/register.jsx';
+import SECANTmethod from './page/secant.jsx';
 const router = createBrowserRouter([
   {
     path: "Lobby",
@@ -58,6 +60,14 @@ const router = createBrowserRouter([
     {
       path: "Newtonrapson",
       element: <NEWTONRAPSON/>
+    },
+    {
+      path: "Secantmed",
+      element: <SECANTmethod/>
+    },
+    {
+      path : "linear",
+      element: <LinearAGB101/>
     }
     ]
   }

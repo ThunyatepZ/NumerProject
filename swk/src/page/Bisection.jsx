@@ -6,7 +6,7 @@ import Submenuroot from '../component/submenu.root';
 import BasicTable from '../component/Table';
 const postBIS = "http://localhost:5000/api/bisec"
 
-function Graphical() {
+function BisectionFornt() {
     const [FX,setFX] = useState("")
     const [Xstart,setXstart] = useState("")
     const [Xend,setXend] = useState("")
@@ -76,7 +76,7 @@ return (
     <div className=''>
     
     <div className='text-center text-3xl'>
-        <h1 className='text-white pt-10 pb-5'>Graphical Method : Bisection</h1>
+        <h1 className='text-white pt-10 pb-5'>Root of equation : Bisection</h1>
         <div className="divider divider-neutral"></div>
         
     </div>
@@ -119,4 +119,4 @@ return (
 )
 }
 
-export default Graphical
+export default BisectionFornt
