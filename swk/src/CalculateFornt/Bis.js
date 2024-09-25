@@ -1,10 +1,15 @@
 import { all, create } from 'mathjs';
+import Swal from 'sweetalert2';
 const math = create(all)
 export default function Bisection101({Xstart,Xend,Error,equation}){
     let scope
     
     if(!Error || !Xstart || !Xend || !equation){
-        alert("Please input")
+        Swal.fire({
+            title: "Error!",
+            text: "Please correct all : Xstart, Xend, Error, equation",
+            icon: "error"
+        });
         return 1
     }
     else{
@@ -47,6 +52,11 @@ export default function Bisection101({Xstart,Xend,Error,equation}){
                 ErrorRe.push(findError * 100)
                 XMO = XM
             }if(findError <= parseFloat(Error)){
+                Swal.fire({
+                    title: "Good job!",
+                    text: "You clicked the button!",
+                    icon: "success"
+                });
                 console.log(x)
                 console.log(y)
 

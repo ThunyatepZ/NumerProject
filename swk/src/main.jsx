@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import App from './App.jsx';
 import './index.css';
+import NEWTONDIVIDED from './inter/newtondiv.jsx';
 import Bisection from './page/Bisection.jsx';
 import Falsepositionpg from './page/falsepositionpg.jsx';
 import Graphical from './page/Graphical.jsx';
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
     {
       path : "linear",
       element: <LinearAGB101/>
+    },
+    {
+      path : "newtondiv",
+      element : <NEWTONDIVIDED/>
     }
     ]
   }

@@ -1,8 +1,15 @@
 import { all, create } from 'mathjs';
+import Swal from 'sweetalert2';
+// or via CommonJS
+
 const math = create(all)
 export default function GraphicalJS({Xstart,Xend,Error,equation}){
     if(!Xstart || !Xend || !Error || !equation){
-        alert("Please input")
+        Swal.fire({
+            title: "Error!",
+            text: "Please correct all : Xstart, Xend, Error, equation",
+            icon: "error"
+        });
         return 1
     }
     else{
@@ -44,7 +51,11 @@ export default function GraphicalJS({Xstart,Xend,Error,equation}){
 
         anser = x1
         if(error < Error){
-            
+            Swal.fire({
+                title: "Good job!",
+                text: "You clicked the button!",
+                icon: "success"
+            });
             return(
                 {
                     NewAnser: anser,
@@ -57,6 +68,11 @@ export default function GraphicalJS({Xstart,Xend,Error,equation}){
             )
         }
         else if(x1 == xend){
+            Swal.fire({
+                title: "Good job!",
+                text: "You clicked the button!",
+                icon: "success"
+            });
             scope = {x:x1}
             y = fx(x1)
             keepx.push(x1)
@@ -69,6 +85,7 @@ export default function GraphicalJS({Xstart,Xend,Error,equation}){
 
             return(
                 {
+                    
                     NewAnser: anser,
                     xans: keepx,
                     it: keepiter,

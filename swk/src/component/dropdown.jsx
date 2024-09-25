@@ -35,6 +35,8 @@ export default function BasicMenu() {
       >
         <MenuItem onClick={handleClose}><Link to="/Home/Rootequation">Root of equation</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link to={"/Home/Linear"}>Linear algebra equation</Link></MenuItem>
+        <MenuItem onClick={handleClose}><Link to={"/Home/newtondiv"}>Interpolation</Link></MenuItem>
+        
       </Menu>
     </div>
   );

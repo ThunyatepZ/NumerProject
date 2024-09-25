@@ -13,7 +13,7 @@ export function Graphishow({ x, y,check}) {
 
   } catch (err) {
     // ถ้ามีข้อผิดพลาดในการจัดเรียงข้อมูลจะจับได้ที่นี่
-    console.error("Error sorting data:", err);
+    // console.error("Error sorting data:", err);
   }
 
   return (

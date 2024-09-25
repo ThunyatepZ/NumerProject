@@ -26,7 +26,8 @@
     "react-katex": "^3.0.1",
     "react-plotly.js": "^2.6.0",
     "react-router-dom": "^6.24.1",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "sweetalert2": "^11.14.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

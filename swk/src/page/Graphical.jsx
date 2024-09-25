@@ -49,14 +49,13 @@ function Graphical() {
     }
 
     const handlesubmit = async(e)=>{
+        
         e.preventDefault()
         //console.log(form)
         let G = GraphicalJS(form)
         Setname(G)
         name.xans.sort((a,b) => a-b)
-        x.sort((a, b) => a - b);
-        y.sort((a, b) => a - b);
-
+        
     }
 
     
@@ -91,7 +90,7 @@ return (
         </div>
         <div className='text-center'>
         {/* <br />[equation:{ANS.equation} Xstart:{ANS.Xstart} Xend:{ANS.Xend} Error:{ANS.Error}]<br/> */}
-        {/* <br />{name.NewAnser}<br/> */}
+        <br />Anser : {name.NewAnser}<br/>
         </div>
 
         <div className='text-center text-white'>
@@ -100,7 +99,7 @@ return (
 
 
         <div className='w-full flex justify-center items-center'>
-            <div className='App rounded-lg border border-black overflow-hidden'>
+            <div className='rounded-lg border border-black overflow-hidden'>
             <Graphishow className='rounded-md border border-black' x ={name.xans} y ={name.yans} check={true}/>
             </div>
 
