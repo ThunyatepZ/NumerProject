@@ -36,7 +36,7 @@ function Lobbie() {
             <Stack spacing={2} direction="row">
               <Link to="/Home/Rootequation">
                 <Button variant="contained" className='hover:text-rose-500'>
-                  Get Start
+                  Get Start at Graphical
                 </Button>
               </Link>
               <Button variant="outlined" onClick={handleOpen}>
