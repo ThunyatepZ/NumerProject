@@ -8,6 +8,7 @@ import App from './App.jsx';
 import './index.css';
 import NEWTONDIVIDED from './inter/newtondiv.jsx';
 import Linear from './linear/LinearAGB.jsx';
+import Gauss from './linear/pageAGB/Gauss.jsx';
 import Bisection from './page/Bisection.jsx';
 import Falsepositionpg from './page/falsepositionpg.jsx';
 import Graphical from './page/Graphical.jsx';
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
     {
       path : "newtondiv",
       element : <NEWTONDIVIDED/>
+    },
+    {
+      path: "GaussElit",
+      element: <Gauss/>
     }
     ]
   }

@@ -28,7 +28,7 @@ function Graphical() {
     const handlesubmit = async(e)=>{
 
         e.preventDefault()
-        let O = Onepointiter(form)
+        let O = await Onepointiter(form)
         seranser(O)
 
 

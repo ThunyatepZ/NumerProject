@@ -49,7 +49,7 @@ function Graphical() {
     const handlesubmit = async (e) => {
 
         e.preventDefault()
-        const l = Falseposition(form)
+        const l = await Falseposition(form)
         setresive(l)
     }
 

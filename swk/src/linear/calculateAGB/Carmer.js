@@ -1,9 +1,11 @@
-import { all, create } from 'mathjs'
+import { all, create } from 'mathjs';
 const math = create(all)
 export default function carmerRule(object){
 let A = [...object.matrixA]
 let B = [...object.matrixB]
-let x = [[1,1,1],[1,1,1],[1,1,1]]
+let x = Array.from({ length: A.length }, () => Array(A.length).fill(1));
+
+
 let anser = []
 let temp
 for(let i = 0;i < A.length;i++){
@@ -17,6 +19,7 @@ for(let i = 0;i < A.length;i++){
     }
     anser[i] = ((' x' + (i+1) + ' : ') + math.det(x)/math.det(A))
     console.log(math.det(A))
+    console.log(x)
 }
 
     return({

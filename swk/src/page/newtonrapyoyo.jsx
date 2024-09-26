@@ -28,7 +28,7 @@ function NEWTONRAPSON() {
     const handlesubmit = async(e)=>{
 
         e.preventDefault()
-        let O = Newton(form)
+        let O = await Newton(form)
         seranser(O)
 
 

@@ -52,7 +52,7 @@ function BisectionFornt() {
     const handlesubmit = async(e)=>{
 
         e.preventDefault()
-        const B = Bisection101(form)
+        const B = await Bisection101(form)
         seter(B)
         Graphishow(er)
         BasicTable(er)

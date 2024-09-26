@@ -52,7 +52,7 @@ function Graphical() {
         
         e.preventDefault()
         //console.log(form)
-        let G = GraphicalJS(form)
+        let G = await GraphicalJS(form)
         Setname(G)
         name.xans.sort((a,b) => a-b)
         

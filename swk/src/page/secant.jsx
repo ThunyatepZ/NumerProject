@@ -53,7 +53,7 @@ function SECANTmethod() {
     const handlesubmit = async(e)=>{
 
         e.preventDefault()
-        const B = secantmethodcalculate(form)
+        const B = await secantmethodcalculate(form)
         seter(B)
     }
 
