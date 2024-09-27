@@ -21,6 +21,16 @@ function MatrixEquation() {
   }
 
   const sendTocal = async(e) =>{
+    const fillmatrixATrue = matrixA.every(row => row.every(value => value != ''))
+    const fillmatrixBTrue = matrixB.every(value => value != '')
+    if(!fillmatrixATrue){
+      alert("AAAAAAAAA")
+      return
+    }
+    if(!fillmatrixBTrue){
+      alert('BBBBBBBB')
+      return
+    }
     let a = await carmerRule(object)
     setanser(a)
   }

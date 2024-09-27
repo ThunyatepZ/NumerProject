@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SubmenuAGB from '../../component/subment.AGB';
-// import GaussElimination from '../calculateAGB/GaussElim';
+import GaussElimination from '../calculateAGB/GaussElim';
 
 function MatrixEquation() {
   const [rows, setRows] = useState(3);
@@ -8,22 +8,42 @@ function MatrixEquation() {
   const [matrixA, setMatrixA] = useState(Array.from({ length: rows }, () => Array(cols).fill('')));
   const [matrixX, setMatrixX] = useState(Array(rows).fill(''));
   const [matrixB, setMatrixB] = useState(Array(rows).fill(''));
-  const [Error,setError] = useState()
-  const [anser,setanser] = useState({})
+  const [Error, setError] = useState();
+  const [anser, setanser] = useState({});
+  const matrixAcopy = matrixA.map(row => [...row]);
+  const matrixBcopy = [...matrixB];
+
   const object = {
-    matrixA,
-    matrixB,
+    matrixA: matrixAcopy,
+    matrixB: matrixBcopy,
     Error
-  }
+  };
 
-  const handleerror = (e) =>{
-    setError(e.target.value)
-  }
+  const handleerror = (e) => {
+    setError(e.target.value);
+  };
 
-  const sendTocal = async(e) =>{
-    // let a = await GaussElimination(object)
-    // setanser(a)
-  }
+  const sendTocal = async (e) => {
+    e.preventDefault();
+
+    // ตรวจสอบว่า matrixA ถูกเติมค่าในทุกช่องหรือไม่
+    const isMatrixAFilled = matrixA.every(row => row.every(value => value !== ''));
+    const isMatrixBFilled = matrixB.every(value => value !== '');
+
+    if (!isMatrixAFilled) {
+      alert('please correct all matrixA');
+      return;
+    }
+
+    if (!isMatrixBFilled) {
+      alert('Please fill all values in Matrix B.');
+      return;
+    }
+
+
+    let a = await GaussElimination(object);
+    setanser(a);
+  };
 
   const handleRowsChange = (e) => {
     const value = e.target.value;
@@ -57,8 +77,6 @@ function MatrixEquation() {
     });
   };
 
-
-
   const handleMatrixBChange = (index, value) => {
     const newMatrixB = [...matrixB];
     newMatrixB[index] = value;
@@ -66,15 +84,14 @@ function MatrixEquation() {
   };
 
   useEffect(() => {
-    // console.log(matrixA);
-    // console.log(matrixB);
-    // console.log(object)
+    // Debugging object structure
+    console.log(object);
   });
 
   return (
     <div>
       <div className='text-center text-3xl'>
-        <h1 className='text-white pt-10 pb-5'>Linear Algebra :Gauss elimination</h1>
+        <h1 className='text-white pt-10 pb-5'>Linear Algebra: Gauss elimination</h1>
         <div className="divider divider-neutral"></div>
         <SubmenuAGB />
       </div>
@@ -87,11 +104,8 @@ function MatrixEquation() {
             col
           </div>
         </div>
-        <div>
-
-        </div>
+        <div></div>
         <div className="flex gap-4 mb-4">
-
           <input
             type="number"
             value={rows}
@@ -106,10 +120,9 @@ function MatrixEquation() {
             className="border rounded p-2 bg-white text-black"
             placeholder="Enter columns"
           />
-
         </div>
         <div className='gap-4 flex mb-4'>
-          <input type="number" className='border rounded p-2 bg-white text-black' placeholder='Error 0.000001' onChange={(e)=>handleerror(e)}/>
+          <input type="number" className='border rounded p-2 bg-white text-black' placeholder='Error 0.000001' onChange={handleerror} />
           <button className="btn btn-primary" onClick={sendTocal}>Primary</button>
         </div>
 
@@ -180,9 +193,15 @@ function MatrixEquation() {
           </div>
         </div>
       </div>
-      {/* {anser.anserA}<br/>{anser.anserB}<br/>{anser.anserX} */}
+      <div className='text-center'>
+        {anser && anser.anserX && (
+          <div>
+            {anser.anserX}
+            {anser.Error}
+          </div>
+        )}
+      </div>
     </div>
-
   );
 }
 
