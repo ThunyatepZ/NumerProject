@@ -58,3 +58,4 @@ for(let i = 0;i < 3;i++){
 }
 console.log(math.round(A))
 console.table(math.round(B))
+console.log(math.multiply(A,B))

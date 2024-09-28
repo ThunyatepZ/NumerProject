@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { BlockMath } from 'react-katex';
 import SubmenuAGB from '../../component/subment.AGB';
 import GaussElimination from '../calculateAGB/GaussElim';
 
-function MatrixEquation() {
+function GaussPage() {
   const [rows, setRows] = useState(3);
   const [cols, setCols] = useState(3);
   const [matrixA, setMatrixA] = useState(Array.from({ length: rows }, () => Array(cols).fill('')));
@@ -84,9 +85,8 @@ function MatrixEquation() {
   };
 
   useEffect(() => {
-    // Debugging object structure
     console.log(object);
-  });
+  },[anser]);
 
   return (
     <div>
@@ -193,16 +193,19 @@ function MatrixEquation() {
           </div>
         </div>
       </div>
-      <div className='text-center'>
+      <div className='text-center w-full flex justify-center items-center'>
+        <div className='mt-10 bg-slate-500 rounded-md text-white w-[50%]'>
         {anser && anser.anserX && (
           <div>
-            {anser.anserX}
+            <BlockMath math={`${anser.anserX}`}/>
             {anser.Error}
           </div>
         )}
+        </div>
+
       </div>
     </div>
   );
 }
 
-export default MatrixEquation;
+export default GaussPage;

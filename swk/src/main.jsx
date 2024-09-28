@@ -1,24 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {
-  createBrowserRouter,
-  RouterProvider
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import App from './App.jsx';
 import './index.css';
-import NEWTONDIVIDED from './inter/newtondiv.jsx';
-import Linear from './linear/LinearAGB.jsx';
-import Gauss from './linear/pageAGB/Gauss.jsx';
-import Bisection from './page/Bisection.jsx';
-import Falsepositionpg from './page/falsepositionpg.jsx';
-import Graphical from './page/Graphical.jsx';
+
+// Pages
 import Home from './page/Home.jsx';
 import Lobbie from './page/Lobbie.jsx';
 import Logkeeping from './page/Logkeeping.jsx';
+import Registering from './page/register.jsx';
+
+// Root of equation
+import Bisection from './page/Bisection.jsx';
+import Falsepositionpg from './page/falsepositionpg.jsx';
+import Graphical from './page/Graphical.jsx';
 import NEWTONRAPSON from './page/newtonrapyoyo.jsx';
 import Onepointiter from './page/Onepoint.jsx';
-import Registering from './page/register.jsx';
 import SECANTmethod from './page/secant.jsx';
+
+// Interpolation
+import NEWTONDIVIDED from './inter/newtondiv.jsx';
+
+// Linear Algebra
+import GaussPage from './linear/pageAGB/Gauss.jsx';
+import GaussJordan from './linear/pageAGB/GaussJordan.jsx';
+import CarmerPage from './linear/pageAGB/LinearAGB.jsx';
+
 const router = createBrowserRouter([
   {
     path: "Lobby",
@@ -68,8 +76,8 @@ const router = createBrowserRouter([
       element: <SECANTmethod/>
     },
     {
-      path : "linear",
-      element: <Linear/>
+      path : "Carmer",
+      element: <CarmerPage/>
     },
     {
       path : "newtondiv",
@@ -77,7 +85,11 @@ const router = createBrowserRouter([
     },
     {
       path: "GaussElit",
-      element: <Gauss/>
+      element: <GaussPage/>
+    },
+    {
+      path: "GaussJordan",
+      element: <GaussJordan/>
     }
     ]
   }

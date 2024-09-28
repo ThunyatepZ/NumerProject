@@ -1,12 +1,12 @@
 import { all, create } from 'mathjs';
 import React, { useEffect, useState } from 'react';
 import { BlockMath } from 'react-katex';
-import MathEquation from '../component/Boxmath';
-import SubmenuAGB from '../component/subment.AGB';
-import carmerRule from './calculateAGB/Carmer';
+import MathEquation from '../../component/Boxmath';
+import SubmenuAGB from '../../component/subment.AGB';
+import carmerRule from '../calculateAGB/Carmer';
 const math = create(all)
 
-function MatrixEquation() {
+function CarmerPage() {
   const [rows, setRows] = useState(3);
   const [cols, setCols] = useState(3);
   const [matrixA, setMatrixA] = useState(Array.from({ length: rows }, () => Array(cols).fill('')));
@@ -204,7 +204,7 @@ function MatrixEquation() {
       <div className='w-full flex justify-center items-center'>
         <div className="mt-10 bg-slate-500 rounded-md text-white w-[50%]" >
           <div>
-            {anser.Matrix && Array.isArray(anser.Matrix) && matrixB && Array.isArray(matrixB) && (
+            {/* {anser.Matrix && Array.isArray(anser.Matrix) && matrixB && Array.isArray(matrixB) && (
               <BlockMath
                 math={`
         \det(A)
@@ -229,16 +229,13 @@ function MatrixEquation() {
         
       \\end{bmatrix}
       \\ = ${anser.det}`}
-
+              />
+            )} */}
+            {anser.Matrix && Array.isArray(anser.Matrix) && matrixB && Array.isArray(matrixB) && (
+              <BlockMath
+                math={`${anser.Ma}`}
               />
             )}
-            {anser.Matrix && Array.isArray(anser.Matrix) && matrixB && Array.isArray(matrixB) && (
-    <BlockMath
-      math={`${anser.Ma}`}
-        
-    />
-  )}
-
             {anser.Ma && (
               <MathEquation equation='' />
             )}
@@ -255,4 +252,4 @@ function MatrixEquation() {
   );
 }
 
-export default MatrixEquation;
+export default CarmerPage;

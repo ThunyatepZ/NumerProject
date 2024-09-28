@@ -38,11 +38,15 @@ export default function GaussE(props) {
             x[k] = ((mxB[k] - sum) / mxA[k][k])
         }
 
+        for(let i = 0;i < x.length;i++){
+            x[i] = `x${i+1}:` + x[i]
+        }
+        
         return {
             
             anserA: mxA,
             anserB: mxB,
-            anserX: (x) + " "
+            anserX: x
         };
     } catch (err) {
         return({

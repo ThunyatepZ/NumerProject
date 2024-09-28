@@ -12,7 +12,7 @@ do{
         let sum = 0;
         for(let j = 0;j < 4;j++){
             if(i != j){
-                sum+= equation[i][j] * x0[j];
+                sum += equation[i][j] * x0[j];
             }
         }
     
