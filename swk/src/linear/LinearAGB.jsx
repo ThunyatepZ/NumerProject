@@ -1,6 +1,10 @@
+import { all, create } from 'mathjs';
 import React, { useEffect, useState } from 'react';
+import { BlockMath } from 'react-katex';
+import MathEquation from '../component/Boxmath';
 import SubmenuAGB from '../component/subment.AGB';
 import carmerRule from './calculateAGB/Carmer';
+const math = create(all)
 
 function MatrixEquation() {
   const [rows, setRows] = useState(3);
@@ -8,32 +12,48 @@ function MatrixEquation() {
   const [matrixA, setMatrixA] = useState(Array.from({ length: rows }, () => Array(cols).fill('')));
   const [matrixX, setMatrixX] = useState(Array(rows).fill(''));
   const [matrixB, setMatrixB] = useState(Array(rows).fill(''));
-  const [Error,setError] = useState()
-  const [anser,setanser] = useState({})
+  const [Error, setError] = useState();
+  const [anser, setAnser] = useState({});
+  let i = 1
   const object = {
     matrixA,
     matrixB,
     Error
-  }
+  };
 
-  const handleerror = (e) =>{
-    setError(e.target.value)
-  }
+  const handleError = (e) => {
+    setError(e.target.value);
+  };
 
-  const sendTocal = async(e) =>{
-    const fillmatrixATrue = matrixA.every(row => row.every(value => value != ''))
-    const fillmatrixBTrue = matrixB.every(value => value != '')
-    if(!fillmatrixATrue){
-      alert("AAAAAAAAA")
-      return
+  const sendToCal = async (e) => {
+    const fillMatrixATrue = matrixA.every(row => row.every(value => value !== ''));
+    const fillMatrixBTrue = matrixB.every(value => value !== '');
+
+    if (!fillMatrixATrue) {
+      alert("Please fill in all values of Matrix A.");
+      return;
     }
-    if(!fillmatrixBTrue){
-      alert('BBBBBBBB')
-      return
+    if (!fillMatrixBTrue) {
+      alert('Please fill in all values of Matrix B.');
+      return;
     }
-    let a = await carmerRule(object)
-    setanser(a)
-  }
+
+    try {
+      const a = await carmerRule(object);
+
+      // ตรวจสอบค่าจาก carmerRule
+      console.log('Matrix from carmerRule:', a.Matrix);
+
+      // แปลงค่าที่ไม่เป็นตัวเลขให้เป็นตัวเลข
+      a.Matrix = a.Matrix.map(row =>
+        row.map(value => Number(value) || 0) // ถ้าไม่สามารถแปลงเป็นตัวเลขได้ จะเป็น 0
+      );
+
+      setAnser(a);
+    } catch (error) {
+      console.error("Error in calculation:", error);
+    }
+  };
 
   const handleRowsChange = (e) => {
     const value = e.target.value;
@@ -67,8 +87,6 @@ function MatrixEquation() {
     });
   };
 
-
-
   const handleMatrixBChange = (index, value) => {
     const newMatrixB = [...matrixB];
     newMatrixB[index] = value;
@@ -78,30 +96,22 @@ function MatrixEquation() {
   useEffect(() => {
     // console.log(matrixA);
     // console.log(matrixB);
-    // console.log(object)
-  });
+    console.log(object);
+  }, [matrixA, matrixB, object]);
 
   return (
     <div>
       <div className='text-center text-3xl'>
-        <h1 className='text-white pt-10 pb-5'>Linear Algebra : carmer rule</h1>
+        <h1 className='text-white pt-10 pb-5'>Linear Algebra: Cramer Rule</h1>
         <div className="divider divider-neutral"></div>
         <SubmenuAGB />
       </div>
       <div className="flex flex-col items-center mt-5">
         <div className='flex space-x-48 mb-2'>
-          <div className='text-xl'>
-            row
-          </div>
-          <div className='text-xl'>
-            col
-          </div>
-        </div>
-        <div>
-
+          <div className='text-xl'>row</div>
+          <div className='text-xl'>col</div>
         </div>
         <div className="flex gap-4 mb-4">
-
           <input
             type="number"
             value={rows}
@@ -116,11 +126,10 @@ function MatrixEquation() {
             className="border rounded p-2 bg-white text-black"
             placeholder="Enter columns"
           />
-
         </div>
         <div className='gap-4 flex mb-4'>
-          <input type="number" className='border rounded p-2 bg-white text-black' placeholder='Error 0.000001' onChange={(e)=>handleerror(e)}/>
-          <button className="btn btn-primary" onClick={sendTocal}>Primary</button>
+          <input type="number" className='border rounded p-2 bg-white text-black' placeholder='Error 0.000001' onChange={handleError} />
+          <button className="btn btn-primary" onClick={sendToCal}>Calculate</button>
         </div>
 
         <div className="flex gap-10">
@@ -163,7 +172,7 @@ function MatrixEquation() {
             </div>
           </div>
 
-          {/* แสดงสัญลักษณ์ "=" */}
+          {/* Show "=" symbol */}
           <div className="flex items-center justify-center">
             <h2 className="mx-4 font-bold text-xl">=</h2>
           </div>
@@ -190,9 +199,59 @@ function MatrixEquation() {
           </div>
         </div>
       </div>
-      {anser.err}<br/>{anser.test}<br/>{anser.Ma}
-    </div>
 
+      {/* Display Results */}
+      <div className='w-full flex justify-center items-center'>
+        <div className="mt-10 bg-slate-500 rounded-md text-white w-[50%]" >
+          <div>
+            {anser.Matrix && Array.isArray(anser.Matrix) && matrixB && Array.isArray(matrixB) && (
+              <BlockMath
+                math={`
+        \det(A)
+        \\begin{bmatrix}
+        
+        \\begin{matrix}
+        
+          ${anser.Matrix.map((row, rowIndex) => (
+                  Array.isArray(row)
+                    ? row.map((value, colIndex) => (
+                      (rowIndex === 0 && colIndex === 0)
+                        ? `${value}`
+                        : value
+                    )).join(' & ')
+                    : ''
+                )).join(' \\\\\n')}
+        \\end{matrix}
+
+        \\begin{array}{c:c}
+
+        \\end{array}
+        
+      \\end{bmatrix}
+      \\ = ${anser.det}`}
+
+              />
+            )}
+            {anser.Matrix && Array.isArray(anser.Matrix) && matrixB && Array.isArray(matrixB) && (
+    <BlockMath
+      math={`${anser.Ma}`}
+        
+    />
+  )}
+
+            {anser.Ma && (
+              <MathEquation equation='' />
+            )}
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+
+    </div>
   );
 }
 

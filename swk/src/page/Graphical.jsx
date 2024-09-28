@@ -100,7 +100,7 @@ return (
 
         <div className='w-full flex justify-center items-center'>
             <div className='rounded-lg border border-black overflow-hidden'>
-            <Graphishow className='rounded-md border border-black' x ={name.xans} y ={name.yans} check={true}/>
+            <Graphishow className='rounded-md border border-black' x ={name.xans} y ={name.yans} check={true} maingraphx={name.Mgx} maingraphy={name.Mgy}/>
             </div>
 
         </div>

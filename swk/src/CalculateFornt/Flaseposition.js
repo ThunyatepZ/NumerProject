@@ -19,6 +19,14 @@ export default function Falseposition ({Xstart,Xend,Error,equation}){
         }
         let Iteration = []
         let x = [],y = [],errorRe = []
+        let maingraphX = []
+        let maingraphY = []
+        for(let i = -10;i <= 10;i++){
+            maingraphX.push(i)
+            scope = {x:i}
+            let a = find_function(i)
+            maingraphY.push(a)
+        }
         let XL = parseFloat(Xstart)
         let XR = parseFloat(Xend)
         let X1_old = 0,finderror
@@ -71,7 +79,9 @@ export default function Falseposition ({Xstart,Xend,Error,equation}){
                     X: x,
                     Y: y,
                     RER: errorRe,
-                    ITER: Iteration
+                    ITER: Iteration,
+                    Mgx : maingraphX,
+                    Mgy: maingraphY
                 })
             }
             else{

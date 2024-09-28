@@ -19,6 +19,14 @@ export default function Bisection101({Xstart,Xend,Error,equation}){
         }
         let x = []
         let y = []
+        let maingraphX = []
+        let maingraphY = []
+        for(let i = -10;i <= 10;i++){
+            maingraphX.push(i)
+            scope = {x:i}
+            let a = find_function(i)
+            maingraphY.push(a)
+        }
         let ErrorRe = []
         let Iteration = []
         let iter = 0
@@ -66,7 +74,9 @@ export default function Bisection101({Xstart,Xend,Error,equation}){
                     X: x,
                     Y: y,
                     reErr: ErrorRe,
-                    ITER : Iteration
+                    ITER : Iteration,
+                    Mgx : maingraphX,
+                    Mgy: maingraphY
                 })
             }
             else{

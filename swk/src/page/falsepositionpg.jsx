@@ -85,7 +85,7 @@ function Graphical() {
 
             </div>
             <div className='text-center'>
-                <br />{resive.X1}<br />
+                <br />Anser : {resive.X1}<br />
             </div>
 
 
@@ -96,7 +96,7 @@ function Graphical() {
 
             <div className='w-full flex justify-center items-center'>
                 <div className=''>
-                    <Graphishow x={resive.X} y={resive.Y} />
+                    <Graphishow x={resive.X} y={resive.Y} maingraphx={resive.Mgx} maingraphy={resive.Mgy}/>
                 </div>
 
             </div>

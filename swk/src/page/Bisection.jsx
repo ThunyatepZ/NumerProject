@@ -107,7 +107,7 @@ return (
 
 
         <div className='flex justify-center'>
-                <Graphishow x ={er.X} y ={er.Y}/>
+                <Graphishow x ={er.X} y ={er.Y} maingraphx={er.Mgx} maingraphy={er.Mgy}/>
             </div>
             <div className='w-full flex justify-center items-center mt-10'>
                 <div className='w-[70%]'>

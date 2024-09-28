@@ -20,6 +20,14 @@ export default function GraphicalJS({Xstart,Xend,Error,equation}){
     }
     let anser
     let error;
+    let maingraphX = []
+    let maingraphY = []
+    for(let i = -10;i <= 10;i++){
+        maingraphX.push(i)
+        scope = {x:i}
+        let a = fx(i)
+        maingraphY.push(a)
+    }
     let keepx = []
     let keepFX = []
     let Keeperror = []
@@ -62,7 +70,11 @@ export default function GraphicalJS({Xstart,Xend,Error,equation}){
                     xans: keepx,
                     it: keepiter,
                     yans: keepFX,
-                    err: Keeperror
+                    err: Keeperror,
+                    type: 'Graphical',
+                    Mgx : maingraphX,
+                    Mgy: maingraphY
+                    
 
                 }
             )
@@ -91,8 +103,10 @@ export default function GraphicalJS({Xstart,Xend,Error,equation}){
                     it: keepiter,
                     yans: keepFX,
                     err: Keeperror,
-                    type: 'Graphical'
-
+                    type: 'Graphical',
+                    Mgx : maingraphX,
+                    Mgy: maingraphY
+                    
                 }
             )
         }

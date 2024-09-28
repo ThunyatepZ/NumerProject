@@ -4,7 +4,7 @@ import Plot from "react-plotly.js";
 
 const math = create(all);
 
-export function Graphishow({ x, y,check}) {
+export function Graphishow({ x, y,check, maingraphx,maingraphy}) {
   try {
     if(check == true){
       x.sort((a, b) => a - b);
@@ -33,6 +33,12 @@ export function Graphishow({ x, y,check}) {
             mode: "markers+lines", // การแสดงผลแบบมีทั้งจุดและเส้น
             type: "scatter", // ประเภทของกราฟคือ scatter
           },
+          {
+            x : maingraphx,
+            y : maingraphy,
+            mode : "lines",
+            type: "scatter",
+          }
         ]}
         layout={{
           title: "Graph", // ชื่อกราฟ
