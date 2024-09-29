@@ -22,7 +22,7 @@ export default function GraphicalJS({Xstart,Xend,Error,equation}){
     let error;
     let maingraphX = []
     let maingraphY = []
-    for(let i = -10;i <= 10;i++){
+    for(let i = -10;i <= 10;i += 1){
         maingraphX.push(i)
         scope = {x:i}
         let a = fx(i)

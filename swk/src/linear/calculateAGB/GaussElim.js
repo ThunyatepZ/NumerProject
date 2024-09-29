@@ -4,10 +4,11 @@ const math = create(all);
 export default function GaussE(props) {
 
     try {
+        let MAIN = [...props.matrixA]
         let A = [...props.matrixA];
-        let mxA = [...props.matrixA];
+        let mxA = [...A];
         let mxB = [...props.matrixB];
-        let B = [...props.matrixB];
+        let B = [...mxB];
         let x = Array.from({ length: A.length }, () => 0);
 
         for (let i = 0; i < B.length; i++) {
@@ -41,11 +42,10 @@ export default function GaussE(props) {
         for(let i = 0;i < x.length;i++){
             x[i] = `x${i+1}:` + x[i]
         }
-        
         return {
-            
-            anserA: mxA,
-            anserB: mxB,
+            basematrix: MAIN,
+            anserA: math.round(A,6),
+            anserB: B,
             anserX: x
         };
     } catch (err) {

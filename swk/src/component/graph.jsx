@@ -4,16 +4,14 @@ import Plot from "react-plotly.js";
 
 const math = create(all);
 
-export function Graphishow({ x, y,check, maingraphx,maingraphy}) {
+export function Graphishow({ x = [], y = [],check, maingraphx,maingraphy,XG,YG,gotox,gotoy}) {
   try {
-    if(check == true){
+    if(check === true){
       x.sort((a, b) => a - b);
       y.sort((a, b) => a - b);
     }
 
   } catch (err) {
-    // ถ้ามีข้อผิดพลาดในการจัดเรียงข้อมูลจะจับได้ที่นี่
-    // console.error("Error sorting data:", err);
   }
 
   return (
@@ -28,15 +26,26 @@ export function Graphishow({ x, y,check, maingraphx,maingraphy}) {
         }}
         data={[
           {
-            x: x, // ข้อมูลแกน X
-            y: y, // ข้อมูลแกน Y
-            mode: "markers+lines", // การแสดงผลแบบมีทั้งจุดและเส้น
-            type: "scatter", // ประเภทของกราฟคือ scatter
+            x: check === "One" && x.length > 0 ?  [1,...x] : x,
+            y: check === "One" && y.length > 0 ? [1,...y] : y,
+            name : check === "One" && x.length > 0 ? 'Onepoint' : 'Value',
+            line: check === "One" ? { shape: "hv", color: "red" } : 1,
+            mode: "markers+lines",
+            type: "scatter",
           },
           {
             x : maingraphx,
             y : maingraphy,
+            name: 'Main graph',
             mode : "lines",
+            type: "scatter",
+            
+          },
+          {
+            x: XG,
+            y :YG,
+            name: 'x = x',
+            mode : "markers+lines",
             type: "scatter",
           }
         ]}

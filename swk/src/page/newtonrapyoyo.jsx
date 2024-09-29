@@ -72,13 +72,13 @@ return (
 
             <div className='w-full flex justify-center items-center'>
                 <div className=''>
-                    <Graphishow x={anser.X} y={anser.Y} />
+                    <Graphishow x={anser.X} y={anser.Y} maingraphx={anser.Mgx} maingraphy={anser.Mgy}/>
                 </div>
 
             </div>
             <div className='w-full flex justify-center items-center mt-10'>
                 <div className='w-[70%]'>
-                    <BasicTable x={anser.X} y={anser.Y} errorFAC={anser.RER} iterative={anser.ITER} />
+                    <BasicTable x={anser.X} y={anser.Y} errorFAC={anser.RER} iterative={anser.ITER}/>
                 </div>
             </div>
     </div>

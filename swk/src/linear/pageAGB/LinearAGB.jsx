@@ -204,7 +204,7 @@ function CarmerPage() {
       <div className='w-full flex justify-center items-center'>
         <div className="mt-10 bg-slate-500 rounded-md text-white w-[50%]" >
           <div>
-            {/* {anser.Matrix && Array.isArray(anser.Matrix) && matrixB && Array.isArray(matrixB) && (
+            {anser.Matrix && Array.isArray(anser.Matrix) && matrixB && Array.isArray(matrixB) && (
               <BlockMath
                 math={`
         \det(A)
@@ -230,7 +230,7 @@ function CarmerPage() {
       \\end{bmatrix}
       \\ = ${anser.det}`}
               />
-            )} */}
+            )}
             {anser.Matrix && Array.isArray(anser.Matrix) && matrixB && Array.isArray(matrixB) && (
               <BlockMath
                 math={`${anser.Ma}`}

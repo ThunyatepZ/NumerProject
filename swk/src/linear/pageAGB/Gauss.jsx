@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BlockMath } from 'react-katex';
 import SubmenuAGB from '../../component/subment.AGB';
 import GaussElimination from '../calculateAGB/GaussElim';
-
+let l = 1,g = 0
 function GaussPage() {
   const [rows, setRows] = useState(3);
   const [cols, setCols] = useState(3);
@@ -13,6 +13,7 @@ function GaussPage() {
   const [anser, setanser] = useState({});
   const matrixAcopy = matrixA.map(row => [...row]);
   const matrixBcopy = [...matrixB];
+  const [normalmatrix,setnormalmatrix] = useState()
 
   const object = {
     matrixA: matrixAcopy,
@@ -44,6 +45,7 @@ function GaussPage() {
 
     let a = await GaussElimination(object);
     setanser(a);
+    setnormalmatrix(matrixA)
   };
 
   const handleRowsChange = (e) => {
@@ -86,7 +88,7 @@ function GaussPage() {
 
   useEffect(() => {
     console.log(object);
-  },[anser]);
+  }, [anser]);
 
   return (
     <div>
@@ -195,12 +197,72 @@ function GaussPage() {
       </div>
       <div className='text-center w-full flex justify-center items-center'>
         <div className='mt-10 bg-slate-500 rounded-md text-white w-[50%]'>
-        {anser && anser.anserX && (
-          <div>
-            <BlockMath math={`${anser.anserX}`}/>
-            {anser.Error}
-          </div>
-        )}
+<div>
+{anser.anserA && Array.isArray(anser.anserA) && matrixB && Array.isArray(matrixB) && (
+  <BlockMath
+    math={`
+      \MatrixA
+      \\begin{bmatrix}
+
+      \\begin{matrix}
+      ${normalmatrix.map((row, rowIndex) => (
+        Array.isArray(row)
+          ? row.map((value, colIndex) => {
+            return (rowIndex === 0 && colIndex === 0)
+              ? `${value}`
+              : value
+          }).join(' & ')
+          : ''
+      )).join(' \\\\\n')}
+      \\end{matrix}
+
+      \\begin{array}{c:c}
+          ${anser.anserB.map((value, index) => (
+            `& ${value}`
+          )).join(' \\\\\n')}
+      \\end{array}
+      \\end{bmatrix}`}
+    
+  />
+
+)}
+{anser.anserA && (
+  <BlockMath
+  math={`
+    \Gauss Eliminetion
+    \\begin{bmatrix}
+
+    \\begin{matrix}
+    ${anser.anserA.map((row, rowIndex) => (
+      Array.isArray(row)
+        ? row.map((value, colIndex) => {
+          // ทำสีแดงตรงมุมบนซ้ายทั้งเมทริกซ์ A และ B (ตำแหน่งที่ 10 ในรูป)
+          return (value === 0)
+            ? `\\color{red}${value}`  // ทำสีแดงตำแหน่งที่ 10
+            : value;
+        }).join(' & ')
+        : ''
+    )).join(' \\\\\n')}
+    \\end{matrix}
+
+    \\begin{array}{c:c}
+        ${anser.anserB.map((value, index) => (
+          `& ${value}`
+        )).join(' \\\\\n')}
+    \\end{array}
+    \\end{bmatrix}`}/>
+
+  
+
+
+
+
+)}
+        {anser.anserX && (
+          <BlockMath math={`${anser.anserX}`}/>
+    
+)}
+</div>
         </div>
 
       </div>

@@ -1,74 +1,89 @@
 import { all, create } from 'mathjs';
 const math = create(all)
-export default function Onepointiter({Xstart, Error,equation}){
-
+export default function Onepointiter({ Xstart, Error, equation }) {
+    let n = 0
     let scope
-    
-    if(!Error || !Xstart || !equation){
+
+    if (!Error || !Xstart || !equation) {
         alert('Please input')
         return 1
     }
-    else{
-        function calculete(x){
-            return math.evaluate(equation,scope)
+    else {
+        function calculete(x) {
+            return math.evaluate(equation, scope)
         }
-        let x = [],y = [], STR = [],Iteration = []
+        let x = [], y = [], STR = [], Iteration = []
+        let basex = []
+        let basey = []
         let x0 = parseFloat(Xstart)
         let xold = 0
         let iter = 0
+        let graphtox = []
+        let graphttoy = []
         let maingraphX = []
         let maingraphY = []
-        for(let i = -10;i <= 10;i++){
+        for (let i = 0; i <= 10; i++) {
             maingraphX.push(i)
-            scope = {x:i}
+            scope = { x: i }
             let a = calculete(i)
             maingraphY.push(a)
         }
         let error
-        do{
+        do {
+            
             iter++;
+            
             Iteration.push(iter)
+            scope = { x: x0 }
 
-            scope = { x:x0 }
-            if(iter == 1){
-
-            }
-            else{
-                x.push(x0)
-            }
-
+            x.push(x0)
+            basex.push(x0)
+            basey.push(x0)
             x0 = calculete(x0)
 
 
-
-
-            error = math.abs(x0-xold) / x0;
+            error = math.abs(x0 - xold) / x0;
+            iter === 1 ? math.abs(error) : error
             STR.push(error * 100)
-            
-            console.log(error , x0)
+
+            console.log(error, x0)
             xold = x0
-            if(iter == 1){
 
+            y.push(xold)
+
+            if (iter >= 100) {
+                return ({
+                    Xans: math.round(x0, 6),
+                    X: x,
+                    Y: y,
+                    RER: STR,
+                    ITER: Iteration,
+                    Mgx: maingraphX,
+                    Mgy: maingraphY,
+                    XG: basex,
+                    YG: basey,
+                    gotox: graphtox,
+                    gotox: graphttoy
+                })
             }
-            else{
-                y.push(xold)
-            }
 
 
+        } while (iter <= 10 || error >= Error)
 
-
-        }while(iter < 100)
-
-        return({
-            Xans: math.round(x0,6),
+        return ({
+            Xans: math.round(x0, 6),
             X: x,
             Y: y,
             RER: STR,
             ITER: Iteration,
-            Mgx : maingraphX,
-            Mgy: maingraphY
+            Mgx: maingraphX,
+            Mgy: maingraphY,
+            XG: basex,
+            YG: basey,
+            gotox: graphtox,
+            gotox: graphttoy
         })
 
     }
-    
+
 }
