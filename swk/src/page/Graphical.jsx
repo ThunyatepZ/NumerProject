@@ -15,7 +15,7 @@ function Graphical() {
     const [Xend, setXend] = useState("");
     const [Error, setError] = useState("");
     const [form, setForm] = useState({});
-    const [name, setName] = useState("Anser");
+    const [result, setresult] = useState({});
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true)
     const equation = 'f(x) = ';
@@ -23,6 +23,7 @@ function Graphical() {
     useEffect(() => {
         const loadData = () => {
             return new Promise((resolve) => {
+
                 setTimeout(() => {
                     resolve('Loading data...');
                 }, 2000);
@@ -49,8 +50,8 @@ function Graphical() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let G = await GraphicalJS(form);
-        setName(G);
-        name.xans.sort((a, b) => a - b);
+        setresult(G);
+        result.xans.sort((a, b) => a - b);
     };
 
     return (
@@ -105,8 +106,8 @@ function Graphical() {
                     </div>
 
                     <div className='text-center mt-2'>
-                        {name.xans && (
-                            `Anser ${name.NewAnser}`
+                        {result.xans && (
+                            `Anser ${result.NewAnser}`
                         )}
                     </div>
 
@@ -118,11 +119,11 @@ function Graphical() {
                         <div className='rounded-lg border border-black overflow-hidden'>
                             <Graphishow
                                 className='rounded-md border border-black'
-                                x={name.xans}
-                                y={name.yans}
+                                x={result.xans}
+                                y={result.yans}
                                 check={true}
-                                maingraphx={name.Mgx}
-                                maingraphy={name.Mgy}
+                                maingraphx={result.Mgx}
+                                maingraphy={result.Mgy}
                             />
                         </div>
                     </div>
@@ -130,10 +131,10 @@ function Graphical() {
                     <div className='w-full flex justify-center items-center mt-10'>
                         <div className='w-[70%]'>
                             <BasicTable
-                                x={name.xans}
-                                y={name.yans}
-                                errorFAC={name.err}
-                                iterative={name.it}
+                                x={result.xans}
+                                y={result.yans}
+                                errorFAC={result.err}
+                                iterative={result.it}
                             />
                         </div>
                     </div>

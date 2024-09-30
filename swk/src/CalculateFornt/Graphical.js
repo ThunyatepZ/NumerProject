@@ -60,8 +60,8 @@ export default function GraphicalJS({Xstart,Xend,Error,equation}){
         anser = x1
         if(error < Error){
             Swal.fire({
-                title: "Good job!",
-                text: "You clicked the button!",
+                title: "Succes!",
+                text: "Here is your result!",
                 icon: "success"
             });
             return(

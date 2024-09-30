@@ -4,11 +4,11 @@ import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import CircularIndeterminate from '../component/loading';
 
 function Lobbie() {
-  // Modal styles and state
   const style = {
     position: 'absolute',
     top: '50%',
@@ -22,31 +22,54 @@ function Lobbie() {
   };
 
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState(null);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  useEffect(() => {
+    const loadData = () => {
+      return new Promise((resolve) => {
+
+        setTimeout(() => {
+          resolve('Loading data...');
+        }, 2000);
+      });
+    };
+
+    loadData().then((result) => {
+      setData(result);
+      setLoading(false);
+    });
+  }, [open]);
 
   return (
+
+
     <div className='bg-gradient-to-r from-gray-700 via-gray-900 to-black min-h-screen'>
-      <div className="flex justify-between items-center py-96">
-        <h1 className='pl-96 text-3xl hover:text-blue-400'>
-          Welcome to Numerical Method
-        </h1>
-        <ul className="flex">
-          <li className="pr-96">
-            <Stack spacing={2} direction="row">
-              <Link to="/Home/Rootequation">
-                <Button variant="contained" className='hover:text-rose-500'>
-                  Get Start at Graphical
+      <div>
+        {loading ? (<div className='h-screen flex justify-center items-center'><CircularIndeterminate/></div>) : (        <div className="flex justify-between items-center py-96">
+          <h1 className='pl-96 text-3xl hover:text-blue-400'>
+            Welcome to Numerical Method
+          </h1>
+          <ul className="flex">
+            <li className="pr-96">
+              <Stack spacing={2} direction="row">
+                <Link to="/Home/Rootequation">
+                  <Button variant="contained" className='hover:text-rose-500'>
+                    Get Start at Graphical
+                  </Button>
+                </Link>
+                <Button variant="outlined" onClick={handleOpen}>
+                  Outlined
                 </Button>
-              </Link>
-              <Button variant="outlined" onClick={handleOpen}>
-                Outlined
-              </Button>
-              
-            </Stack>
-          </li>
-        </ul>
+
+              </Stack>
+            </li>
+          </ul>
+        </div>)}
+
       </div>
+
 
       {/* Modal code */}
       <Modal
@@ -65,6 +88,8 @@ function Lobbie() {
         </Box>
       </Modal>
     </div>
+
+
   );
 }
 
