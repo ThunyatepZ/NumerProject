@@ -5,6 +5,7 @@ export default function GaussE(props) {
 
     try {
         let MAIN = [...props.matrixA]
+        let matrixstep = []
         let A = [...props.matrixA];
         let mxA = [...A];
         let mxB = [...props.matrixB];
@@ -25,6 +26,7 @@ export default function GaussE(props) {
                     for (let m = 0; m < B.length; m++) {
                         mxA[i][m] = mxA[i][m] - ((temp[m] / tempaJJ) * tempaIJ);
                     }
+                    matrixstep.push(JSON.parse(JSON.stringify(mxA)))
                 }
             }
         }
@@ -42,11 +44,13 @@ export default function GaussE(props) {
         for(let i = 0;i < x.length;i++){
             x[i] = `x${i+1}:` + x[i]
         }
+
         return {
             basematrix: MAIN,
             anserA: math.round(A,6),
             anserB: B,
-            anserX: x
+            anserX: x,
+            step: matrixstep
         };
     } catch (err) {
         return({

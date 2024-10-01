@@ -94,10 +94,9 @@ function CarmerPage() {
   };
 
   useEffect(() => {
-    // console.log(matrixA);
-    // console.log(matrixB);
+    console.log(anser.det)
     console.log(object);
-  }, [matrixA, matrixB, object]);
+  }, [anser]);
 
   return (
     <div>
@@ -227,8 +226,7 @@ function CarmerPage() {
 
         \\end{array}
         
-      \\end{bmatrix}
-      \\ = ${anser.det}`}
+      \\end{bmatrix}`}
               />
             )}
             {anser.Matrix && Array.isArray(anser.Matrix) && matrixB && Array.isArray(matrixB) && (

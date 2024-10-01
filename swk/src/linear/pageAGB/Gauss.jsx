@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BlockMath } from 'react-katex';
 import SubmenuAGB from '../../component/subment.AGB';
 import GaussElimination from '../calculateAGB/GaussElim';
-let l = 1,g = 0
+let l = 0, i = 1;
 function GaussPage() {
   const [rows, setRows] = useState(3);
   const [cols, setCols] = useState(3);
@@ -13,7 +13,7 @@ function GaussPage() {
   const [anser, setanser] = useState({});
   const matrixAcopy = matrixA.map(row => [...row]);
   const matrixBcopy = [...matrixB];
-  const [normalmatrix,setnormalmatrix] = useState()
+  const [normalmatrix, setnormalmatrix] = useState()
 
   const object = {
     matrixA: matrixAcopy,
@@ -28,7 +28,6 @@ function GaussPage() {
   const sendTocal = async (e) => {
     e.preventDefault();
 
-    // ตรวจสอบว่า matrixA ถูกเติมค่าในทุกช่องหรือไม่
     const isMatrixAFilled = matrixA.every(row => row.every(value => value !== ''));
     const isMatrixBFilled = matrixB.every(value => value !== '');
 
@@ -54,7 +53,7 @@ function GaussPage() {
     if (!isNaN(numRows) && numRows > 0) {
       setRows(numRows);
       setMatrixA(Array.from({ length: numRows }, () => Array(cols).fill('')));
-      setMatrixX(Array(numRows).fill(''));
+
       setMatrixB(Array(numRows).fill(''));
     } else {
       setRows('');
@@ -66,6 +65,7 @@ function GaussPage() {
     const numCols = parseInt(value, 10);
     if (!isNaN(numCols) && numCols > 0) {
       setCols(numCols);
+      setMatrixX(Array(numCols).fill(''));
       setMatrixA(Array.from({ length: rows }, () => Array(numCols).fill('')));
     } else {
       setCols('');
@@ -80,6 +80,7 @@ function GaussPage() {
     });
   };
 
+
   const handleMatrixBChange = (index, value) => {
     const newMatrixB = [...matrixB];
     newMatrixB[index] = value;
@@ -88,6 +89,7 @@ function GaussPage() {
 
   useEffect(() => {
     console.log(object);
+    console.log(anser.step)
   }, [anser]);
 
   return (
@@ -132,40 +134,46 @@ function GaussPage() {
           {/* Matrix A */}
           <div className="flex flex-col items-center">
             <h2 className="mb-2 font-bold">[A]</h2>
-            <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
-              {matrixA.map((row, rowIndex) =>
-                row.map((value, colIndex) => (
-                  <div
-                    key={`${rowIndex}-${colIndex}`}
-                    className="h-20 w-20 border border-black bg-blue-500 flex items-center justify-center rounded-lg shadow-lg"
-                  >
-                    <input
-                      type="text"
-                      value={value}
-                      onChange={(e) => handleMatrixAChange(rowIndex, colIndex, e.target.value)}
-                      className="text-center w-full h-full bg-white text-black font-bold rounded-lg outline-none"
-                      placeholder={`a${rowIndex + 1}${colIndex + 1}`}
-                    />
-                  </div>
-                ))
-              )}
-            </div>
+            {rows > 0 && rows <= 10 && cols > 0 && cols <= 10 && (
+              <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
+                {matrixA.map((row, rowIndex) =>
+                  row.map((value, colIndex) => (
+                    <div
+                      key={`${rowIndex}-${colIndex}`}
+                      className="h-20 w-20 border border-black bg-blue-500 flex items-center justify-center rounded-lg shadow-lg"
+                    >
+                      <input
+                        type="text"
+                        value={value}
+                        onChange={(e) => handleMatrixAChange(rowIndex, colIndex, e.target.value)}
+                        className="text-center w-full h-full bg-white text-black font-bold rounded-lg outline-none"
+                        placeholder={`a${rowIndex + 1}${colIndex + 1}`}
+                      />
+                    </div>
+                  ))
+                )}
+              </div>)}
+
           </div>
 
           {/* Matrix X */}
+
           <div className="flex flex-col items-center">
             <h2 className="mb-2 font-bold">x</h2>
-            <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(1, 1fr)' }}>
-              {matrixX.map((value, index) => (
-                <div
-                  key={index}
-                  className="h-20 w-20 border border-black bg-slate-500 flex items-center justify-center rounded-lg shadow-lg"
-                >
-                  x
-                  <span className="text-white font-bold">{value}</span>
-                </div>
-              ))}
-            </div>
+            {rows > 0 && rows <= 10 && cols > 0 && cols <= 10 && (
+              <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(1, 1fr)' }}>
+                {matrixX.map((value, index) => (
+                  <div
+                    key={index}
+                    className="h-20 w-20 border border-black bg-slate-500 flex items-center justify-center rounded-lg shadow-lg"
+                  >
+                    x
+                    <span className="text-white font-bold">{value}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
           </div>
 
           {/* แสดงสัญลักษณ์ "=" */}
@@ -176,93 +184,87 @@ function GaussPage() {
           {/* Matrix B */}
           <div className="flex flex-col items-center">
             <h2 className="mb-2 font-bold">[B]</h2>
-            <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(1, 1fr)' }}>
-              {matrixB.map((value, index) => (
-                <div
-                  key={index}
-                  className="h-20 w-20 border border-black bg-green-500 flex items-center justify-center rounded-lg shadow-lg"
-                >
-                  <input
-                    type="text"
-                    value={value}
-                    onChange={(e) => handleMatrixBChange(index, e.target.value)}
-                    className="text-center w-full h-full bg-white text-black font-bold rounded-lg outline-none"
-                    placeholder={`b${index + 1}`}
-                  />
-                </div>
-              ))}
-            </div>
+            {rows > 0 && rows <= 10 && cols > 0 && cols <= 10 && (
+              <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(1, 1fr)' }}>
+                {matrixB.map((value, index) => (
+                  <div
+                    key={index}
+                    className="h-20 w-20 border border-black bg-green-500 flex items-center justify-center rounded-lg shadow-lg"
+                  >
+                    <input
+                      type="text"
+                      value={value}
+                      onChange={(e) => handleMatrixBChange(index, e.target.value)}
+                      className="text-center w-full h-full bg-white text-black font-bold rounded-lg outline-none"
+                      placeholder={`b${index + 1}`}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
           </div>
         </div>
       </div>
       <div className='text-center w-full flex justify-center items-center'>
-        <div className='mt-10 bg-slate-500 rounded-md text-white w-[50%]'>
-<div>
-{anser.anserA && Array.isArray(anser.anserA) && matrixB && Array.isArray(matrixB) && (
-  <BlockMath
-    math={`
+        <div className='mt-10 bg-slate-500 rounded-md text-white w-[75%]'>
+          <div>
+            {anser.anserA && Array.isArray(anser.anserA) && matrixB && Array.isArray(matrixB) && (
+              <div>
+                <BlockMath
+                  math={`
       \MatrixA
       \\begin{bmatrix}
 
       \\begin{matrix}
       ${normalmatrix.map((row, rowIndex) => (
-        Array.isArray(row)
-          ? row.map((value, colIndex) => {
-            return (rowIndex === 0 && colIndex === 0)
-              ? `${value}`
-              : value
-          }).join(' & ')
-          : ''
-      )).join(' \\\\\n')}
+                    Array.isArray(row)
+                      ? row.map((value, colIndex) => {
+                        return (rowIndex === 0 && colIndex === 0)
+                          ? `${value}`
+                          : value
+                      }).join(' & ')
+                      : ''
+                  )).join(' \\\\\n')}
       \\end{matrix}
 
       \\begin{array}{c:c}
           ${anser.anserB.map((value, index) => (
-            `& ${value}`
-          )).join(' \\\\\n')}
+                    `& ${value}`
+                  )).join(' \\\\\n')}
       \\end{array}
       \\end{bmatrix}`}
-    
-  />
 
-)}
-{anser.anserA && (
-  <BlockMath
-  math={`
-    \Gauss Eliminetion
-    \\begin{bmatrix}
+                />
 
-    \\begin{matrix}
-    ${anser.anserA.map((row, rowIndex) => (
-      Array.isArray(row)
-        ? row.map((value, colIndex) => {
-          // ทำสีแดงตรงมุมบนซ้ายทั้งเมทริกซ์ A และ B (ตำแหน่งที่ 10 ในรูป)
-          return (value === 0)
-            ? `\\color{red}${value}`  // ทำสีแดงตำแหน่งที่ 10
-            : value;
-        }).join(' & ')
-        : ''
-    )).join(' \\\\\n')}
-    \\end{matrix}
-
-    \\begin{array}{c:c}
-        ${anser.anserB.map((value, index) => (
-          `& ${value}`
-        )).join(' \\\\\n')}
-    \\end{array}
-    \\end{bmatrix}`}/>
-
-  
-
-
-
-
-)}
-        {anser.anserX && (
-          <BlockMath math={`${anser.anserX}`}/>
-    
-)}
-</div>
+                <div>
+                  {anser && anser.step && (
+                    <div>
+                      {anser.step.map((step, index) => (
+                        <div key={index} className='mb-4'>
+                          <BlockMath
+                            math={`
+                                  ${`step${index + 1}`}
+                                  \\begin{bmatrix}
+                                    ${step.map(
+                              row => row.map(value => `${value}`)
+                                .join(' & '))
+                                .join(' \\\\ ')}
+                                \\end{bmatrix}`}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+            {anser.anserX && (
+              <div className='text-white'>
+                <BlockMath math={`anser \\ is \\\\${anser.anserX}`} />
+              </div>
+            )}
+          </div>
         </div>
 
       </div>

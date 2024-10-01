@@ -1,7 +1,9 @@
+import { all, create } from 'mathjs';
 import React, { useEffect, useState } from 'react';
 import { BlockMath } from 'react-katex';
 import SubmenuAGB from '../../component/subment.AGB';
 import GaussJordanCalculate from '../calculateAGB/GaussJordanCalculate';
+const math = create(all)
 function GaussJordan() {
     const [rows, setRows] = useState(3);
     const [cols, setCols] = useState(3);
@@ -12,7 +14,7 @@ function GaussJordan() {
     const [anser, setanser] = useState({});
     const matrixAcopy = matrixA.map(row => [...row]);
     const matrixBcopy = [...matrixB];
-
+    const [normalmatrix, setmatrix] = useState()
     const object = {
         matrixA: matrixAcopy,
         matrixB: matrixBcopy,
@@ -25,8 +27,6 @@ function GaussJordan() {
 
     const sendTocal = async (e) => {
         e.preventDefault();
-
-        // ตรวจสอบว่า matrixA ถูกเติมค่าในทุกช่องหรือไม่
         const isMatrixAFilled = matrixA.every(row => row.every(value => value !== ''));
         const isMatrixBFilled = matrixB.every(value => value !== '');
 
@@ -40,9 +40,9 @@ function GaussJordan() {
             return;
         }
 
-
         let a = await GaussJordanCalculate(object);
         setanser(a);
+        setmatrix(matrixA)
     };
 
     const handleRowsChange = (e) => {
@@ -51,7 +51,7 @@ function GaussJordan() {
         if (!isNaN(numRows) && numRows > 0) {
             setRows(numRows);
             setMatrixA(Array.from({ length: numRows }, () => Array(cols).fill('')));
-            setMatrixX(Array(numRows).fill(''));
+
             setMatrixB(Array(numRows).fill(''));
         } else {
             setRows('');
@@ -63,6 +63,7 @@ function GaussJordan() {
         const numCols = parseInt(value, 10);
         if (!isNaN(numCols) && numCols > 0) {
             setCols(numCols);
+            setMatrixX(Array(numCols).fill(''));
             setMatrixA(Array.from({ length: rows }, () => Array(numCols).fill('')));
         } else {
             setCols('');
@@ -85,7 +86,8 @@ function GaussJordan() {
 
     useEffect(() => {
         console.log(object);
-    }, [Object]);
+        console.log(anser.stepElit)
+    }, [anser]);
 
     return (
         <div>
@@ -194,13 +196,61 @@ function GaussJordan() {
 
             </div>
             <div className='text-center w-full flex justify-center items-center'>
-                <div className='mt-10 bg-slate-500 rounded-md text-white w-[50%]'>
-                {anser && anser.anserX && (
-                <div>
-                    <BlockMath math={`${anser.anserX}`}/>
-                    
-                </div>
-            )}
+                <div className='mt-10 bg-slate-500 rounded-md text-white w-[70%]'>
+
+                    {anser && anser.anserX && (
+                        
+                        <div>
+                            <div className='text-xl mt-3'>
+                                result
+                            </div>
+                            <BlockMath math={`
+                            \MatrixA
+                            \\begin{bmatrix}
+                            \\begin{matrix}
+                            ${normalmatrix.map((row, rowIndex) => (
+                                Array.isArray(row)
+                                    ? row.map((value, colIndex) => {
+                                        return (rowIndex === 0 && colIndex === 0)
+                                            ? `${value}`
+                                            : value
+                                    }).join(' & ')
+                                    : ''
+                            )).join(' \\\\\n')}
+                            \\end{matrix}
+
+                            \\begin{array}{c:c}
+                            ${anser.anserB.map((value, index) => (
+                                `& ${value}`
+                            )).join(' \\\\\n')}
+                            \\end{array}
+                            \\end{bmatrix}`} />
+
+                            {anser && anser.stepElit && (
+                                <div>
+                                    {anser.stepElit.map((step, index) => (
+                                        <div key={index} className='mb-4'>
+                                            <BlockMath
+                                                math={`
+                                                    ${`step${index + 1}`}
+                                                    \\begin{bmatrix}
+                                    ${step.map(
+                                    row => row.map(value => `${value}`)
+                                    .join(' & '))
+                                    .join(' \\\\ ')}
+                                \\end{bmatrix}`}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+
+
+                            <BlockMath math={`${anser.anserX}`}></BlockMath>
+                        </div>
+
+                    )}
+
                 </div>
             </div>
 

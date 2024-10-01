@@ -8,6 +8,10 @@ function SubmenuAGB() {
             <li><Link to='/Home/Carmer'>Carmer Rule</Link></li>
             <li><Link to='/Home/GaussElit'>Gauss Elimination</Link></li>
             <li><Link to='/Home/GaussJordan'>Gauss Jordan Elimination</Link></li>
+            <li><Link to='/Home/MatrixINV'>Matrix invertion</Link></li>
+            <li><Link to='/Home/MatrixINV'>LU decomposition methods</Link></li>
+            <li><Link to='/Home/MatrixINV'>Jacobi iteration method</Link></li>
+            <li><Link to='/Home/MatrixINV'>Conjugate Gradient Method</Link></li>
         </ul>
     </div>
     );
