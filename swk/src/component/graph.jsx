@@ -30,7 +30,7 @@ export function Graphishow({ x = [], y = [],check, maingraphx,maingraphy,XG,YG,g
             y: check === "One" && y.length > 0 ? [1,...y] : y,
             name : check === "One" && x.length > 0 ? 'Onepoint' : 'Value',
             line: check === "One" ? { shape: "hv", color: "red" } : 1,
-            mode: "markers+lines",
+            mode: check === 'newton' ? "markers" : "markers+lines",
             type: "scatter",
           },
           {
@@ -47,7 +47,13 @@ export function Graphishow({ x = [], y = [],check, maingraphx,maingraphy,XG,YG,g
             name: 'x = x',
             mode : "markers+lines",
             type: "scatter",
+          },
+          {
+            x: check === 'newton' && x.length > 0 ? gotox : gotox,
+            y: check === 'newton' && y.length > 0 ? gotoy : gotoy,
           }
+
+
         ]}
         layout={{
           title: "Graph", // ชื่อกราฟ

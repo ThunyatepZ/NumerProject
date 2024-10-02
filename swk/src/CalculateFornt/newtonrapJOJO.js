@@ -9,10 +9,12 @@ export default function Newton({ Xstart,Error, equation }) {
         return math.derivative(equation,'x').evaluate(scope)
     }
     let x =[],y=[],STR = [],Iteration = []
-    let xc = Xstart,xold = 0;
+    let xc = parseFloat(Xstart),xold = 0;
     let fx1,fx2,ERROR,Iter = 0;
     let maingraphX = []
     let maingraphY = []
+    let xnewton = []
+    let ynewton = []
     for(let i = -10;i <= 10;i += 0.002){
         maingraphX.push(i)
         scope = {x:i}
@@ -23,22 +25,27 @@ export default function Newton({ Xstart,Error, equation }) {
         Iter++;
         Iteration.push(Iter)
         x.push(xc)
+        xnewton.push(xc)
+        ynewton.push(0)
         let xcs = findfx1(xc)
         Iter === 1 ? y.push(0) : y.push(xcs)
+        xnewton.push(xc)
 
         scope = {x:xc}
         fx1 = findfx1(xc)
+        ynewton.push(fx1)
         scope = {x:xc}
         fx2 = findfx2(xc)
+
         xc = xc - (fx1 / fx2)
         scope = {x:xc}
         ERROR = math.abs(xc - xold) / xc
         STR.push(ERROR * 100)
         xold = xc
     }while(ERROR >= Error)
-        // console.log(STR)
-        // console.log(x)
-        // console.log(Iteration)
+
+        console.log(xnewton)
+        console.log(ynewton)
     return({
             Xans: math.round(xc,6),
             X: x,
@@ -46,7 +53,9 @@ export default function Newton({ Xstart,Error, equation }) {
             RER: STR,
             ITER: Iteration,
             Mgx: maingraphX,
-            Mgy: maingraphY
+            Mgy: maingraphY,
+            newtonx : xnewton,
+            newtony : ynewton
     })
 
 

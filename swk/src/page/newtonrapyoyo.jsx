@@ -72,7 +72,7 @@ return (
 
             <div className='w-full flex justify-center items-center'>
                 <div className=''>
-                    <Graphishow x={anser.X} y={anser.Y} maingraphx={anser.Mgx} maingraphy={anser.Mgy}/>
+                    <Graphishow x={anser.X} y={anser.Y} maingraphx={anser.Mgx} maingraphy={anser.Mgy} gotox={anser.newtonx} gotoy={anser.newtony} check={'newton'}/>
                 </div>
 
             </div>
