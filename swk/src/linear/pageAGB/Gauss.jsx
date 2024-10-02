@@ -227,7 +227,7 @@ function GaussPage() {
                       : ''
                   )).join(' \\\\\n')}
       \\end{matrix}
-      \\end{bmatrix}`
+      \\end{bmatrix}`}
 
                 />
 
