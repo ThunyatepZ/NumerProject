@@ -228,11 +228,7 @@ function GaussPage() {
                   )).join(' \\\\\n')}
       \\end{matrix}
 
-      \\begin{array}{c:c}
-          ${anser.anserB.map((value, index) => (
-                    `& ${value}`
-                  )).join(' \\\\\n')}
-      \\end{array}
+
       \\end{bmatrix}`}
 
                 />
