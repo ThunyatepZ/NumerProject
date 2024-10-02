@@ -214,7 +214,7 @@ function GaussPage() {
                 <BlockMath
                   math={`
       \MatrixA
-      \\begin{bmatrix}
+
 
       \\begin{matrix}
       ${normalmatrix.map((row, rowIndex) => (
@@ -227,9 +227,6 @@ function GaussPage() {
                       : ''
                   )).join(' \\\\\n')}
       \\end{matrix}
-
-
-      \\end{bmatrix}`}
 
                 />
 
