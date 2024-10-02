@@ -215,7 +215,7 @@ function GaussPage() {
                   math={`
       \MatrixA
 
-
+     \\begin{bmatrix}
       \\begin{matrix}
       ${normalmatrix.map((row, rowIndex) => (
                     Array.isArray(row)
@@ -227,6 +227,7 @@ function GaussPage() {
                       : ''
                   )).join(' \\\\\n')}
       \\end{matrix}
+      \\end{bmatrix}`
 
                 />
 
