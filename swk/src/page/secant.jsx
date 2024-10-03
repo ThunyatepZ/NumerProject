@@ -9,33 +9,9 @@ const postBIS = "http://localhost:5000/api/bisec"
 
 function SECANTmethod() {
     const [FX,setFX] = useState("")
-    const [Xstart,setXstart] = useState("")
-    const [Xend,setXend] = useState("")
-    const [Error,setError] = useState("")
     const [form,setform] = useState({})
-    const [name , Setname] = useState(null)
     const equation = 'f(x) = ';
     const [er,seter] = useState("");
-
-    const FXchange = ({target: {value}}) =>{
-        console.log(value)
-        setFX(value)
-    }
-    const XstartChange = ({target: {value}}) =>{
-        console.log(value)
-        setXstart(value)
-    }
-    const Xendchange = ({target: {value}}) =>{
-        console.log(value)
-        setXend(value)
-    }
-    const Errorchange = ({target: {value}}) =>{
-        console.log(value)
-        setError(value)
-    }
-    const [ANS,SetANS] = useState()
-    
-
     const handlechangeforequation = (e) =>{
         setFX(e.target.value)
     }
@@ -97,7 +73,7 @@ return (
 
 
         <div className='flex justify-center'>
-                <Graphishow x ={er.arrXans} y ={er.arrFxans}/>
+                <Graphishow x ={er.arrXans} y ={er.arrFxans} maingraphx={er.Mgx} maingraphy={er.Mgy} gotox={er.secantx} gotoy={er.secanty} check={'newton'}/>
             </div>
             <div className='w-full flex justify-center items-center mt-10'>
                 <div className='w-[70%]'>

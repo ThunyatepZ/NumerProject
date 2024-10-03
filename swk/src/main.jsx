@@ -26,6 +26,7 @@ import NEWTONDIVIDED from './inter/newtondiv.jsx';
 import GaussPage from './linear/pageAGB/Gauss.jsx';
 import GaussJordan from './linear/pageAGB/GaussJordan.jsx';
 import CarmerPage from './linear/pageAGB/LinearAGB.jsx';
+import Ludecomposition from './linear/pageAGB/Ludecomposition.jsx';
 import MINV from './linear/pageAGB/matrixinvertion.jsx';
 
 const router = createBrowserRouter([
@@ -95,6 +96,10 @@ const router = createBrowserRouter([
     {
       path: "MatrixINV",
       element: <MINV/>
+    },
+    {
+      path :"LU_decomposit",
+      element : <Ludecomposition/>
     }
     ]
   }

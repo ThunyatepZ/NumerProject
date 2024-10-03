@@ -41,9 +41,9 @@ export default function Newton({ Xstart,Error, equation }) {
         scope = {x:xc}
         ERROR = math.abs(xc - xold) / xc
         STR.push(ERROR * 100)
-        xold = xc
-    }while(ERROR >= Error)
 
+        xold = xc
+    }while(ERROR > Error)
         console.log(xnewton)
         console.log(ynewton)
     return({
