@@ -72,8 +72,8 @@ export default function GaussJordanCalculate(props){
         return({
 
             anserX: x,
-            stepElit : math.round(matrixsum,6),
-            anserA: math.round(A,6),
+            stepElit : matrixsum,
+            anserA: A,
             anserB: B
         })
     

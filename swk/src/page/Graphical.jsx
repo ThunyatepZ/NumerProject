@@ -1,9 +1,8 @@
 import { all, create } from 'mathjs';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import GraphicalJS from '../CalculateFornt/Graphical';
 import MathEquation from '../component/Boxmath';
 import Graphishow from '../component/graph';
-import CircularIndeterminate from '../component/loading';
 import Submenuroot from '../component/submenu.root';
 import BasicTable from '../component/Table';
 
@@ -11,30 +10,13 @@ const math = create(all);
 
 function Graphical() {
     const [FX, setFX] = useState("");
-    const [Xstart, setXstart] = useState("");
-    const [Xend, setXend] = useState("");
-    const [Error, setError] = useState("");
+
     const [form, setForm] = useState({});
     const [result, setresult] = useState({});
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true)
+
     const equation = 'f(x) = ';
 
-    useEffect(() => {
-        const loadData = () => {
-            return new Promise((resolve) => {
 
-                setTimeout(() => {
-                    resolve('Loading data...');
-                }, 2000);
-            });
-        };
-
-        loadData().then((result) => {
-            setData(result);
-            setLoading(false);
-        });
-    }, []);
 
     const handleChangeForEquation = (e) => {
         setFX(e.target.value);
@@ -62,9 +44,7 @@ function Graphical() {
             </div>
 
 
-            {loading ? (
-                <div className='text-center text-white flex justify-items-center items-center justify-center'><CircularIndeterminate/></div> // แสดงข้อความการโหลด
-            ) : (
+            
                 <div>
                     <div className='text-center flex justify-center text-white'>
                         <MathEquation equation={equation} />
@@ -139,7 +119,6 @@ function Graphical() {
                         </div>
                     </div>
                 </div>
-            )}
         </div>
     );
 }
