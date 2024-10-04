@@ -23,6 +23,7 @@ import SECANTmethod from './page/secant.jsx';
 import NEWTONDIVIDED from './inter/newtondiv.jsx';
 
 // Linear Algebra
+import Conjugate from './linear/pageAGB/Conjugate.jsx';
 import GaussPage from './linear/pageAGB/Gauss.jsx';
 import GaussJordan from './linear/pageAGB/GaussJordan.jsx';
 import CarmerPage from './linear/pageAGB/LinearAGB.jsx';
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
     {
       path :"LU_decomposit",
       element : <Ludecomposition/>
+    },
+    {
+      path : "conjugate",
+      element : <Conjugate/>
     }
     ]
   }
