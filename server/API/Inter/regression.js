@@ -25,7 +25,6 @@ for(let i = 0;i < matrixkeepEquation.length;i++){
                 sum = 0
                 inw++
                 console.log(sum)
-                
             }
         }
         else{
@@ -37,7 +36,6 @@ for(let i = 0;i < matrixkeepEquation.length;i++){
             matrixkeepEquation[i][j] = sum
             sum = 0
             console.log(sum)
-
         }
         
     }
