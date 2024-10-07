@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { BlockMath } from 'react-katex';
 import SubmenuAGB from '../../component/subment.AGB';
-import minv from '../calculateAGB/MatrixINV';
-function matrixinvertion() {
+import caljacobi from '../calculateAGB/Jacobi';
+function Jacobipage() {
     const [rows, setRows] = useState(3);
     const [cols, setCols] = useState(3);
     const [matrixA, setMatrixA] = useState(Array.from({ length: rows }, () => Array(cols).fill('')));
     const [matrixX, setMatrixX] = useState(Array(rows).fill(''));
     const [matrixB, setMatrixB] = useState(Array(rows).fill(''));
+    const [matrixx1, setmatrixx1] = useState(Array(rows).fill(''))
     const [Error, setError] = useState();
     const [anser, setanser] = useState({});
     const matrixAcopy = matrixA.map(row => [...row]);
     const matrixBcopy = [...matrixB];
+    const matrixx1copy = [...matrixx1]
+    const [normalmatrixB, setnormalmatrixB] = useState()
     const [normalmatrix, setmatrix] = useState()
+    const [checkfx, setcheckfx] = useState()
     const object = {
         matrixA: matrixAcopy,
         matrixB: matrixBcopy,
+        checktype: checkfx,
+        x1: matrixx1copy,
         Error
     };
 
@@ -38,9 +44,15 @@ function matrixinvertion() {
             return;
         }
 
-        let a = await minv(object);
+        if (rows === 2 && cols === 2) {
+            setcheckfx(2);  // Allow graph rendering when the matrix is 2x2
+        } else {
+            setcheckfx(null);  // Disable graph rendering for other sizes
+        }
+        let a = await caljacobi(object);
         setanser(a);
         setmatrix(matrixA)
+        setnormalmatrixB(matrixB)
     };
 
     const handleRowsChange = (e) => {
@@ -49,6 +61,7 @@ function matrixinvertion() {
         if (!isNaN(numRows) && numRows > 0) {
             setRows(numRows);
             setMatrixA(Array.from({ length: numRows }, () => Array(cols).fill('')));
+            setmatrixx1(Array(numRows).fill(''))
 
             setMatrixB(Array(numRows).fill(''));
         } else {
@@ -82,15 +95,27 @@ function matrixinvertion() {
         setMatrixB(newMatrixB);
     };
 
+    const handleMatrixX1Change = (index, value) => {
+        const newMatrixX1 = [...matrixx1];
+        newMatrixX1[index] = value;
+        setmatrixx1(newMatrixX1);
+        console.log(newMatrixX1);
+    };
+
+
     useEffect(() => {
-        console.log(object);
-        // console.log(anser.stepElit)
+        // console.log(object);
+        // // console.log(checkfx)
+        // // console.log(anser.stepElit)
+
     }, [anser]);
+
+
 
     return (
         <div>
             <div className='text-center text-3xl'>
-                <h1 className='text-white pt-10 pb-5'>Linear Algebra: Matrix Invertion</h1>
+                <h1 className='text-white pt-10 pb-5'>Linear Algebra: Jacobi</h1>
                 <div className="divider divider-neutral"></div>
                 <SubmenuAGB />
             </div>
@@ -190,6 +215,26 @@ function matrixinvertion() {
                             ))}
                         </div>
                     </div>
+
+                    <div className="flex flex-col items-center">
+                        <h2 className="mb-2 font-bold">[x]</h2>
+                        <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(1, 1fr)' }}>
+                            {matrixx1.map((value, index) => (
+                                <div
+                                    key={index}
+                                    className="h-20 w-20 border border-black bg-green-500 flex items-center justify-center rounded-lg shadow-lg"
+                                >
+                                    <input
+                                        type="text"
+                                        value={value}
+                                        onChange={(e) => handleMatrixX1Change(index, e.target.value)}
+                                        className="text-center w-full h-full bg-white text-black font-bold rounded-lg outline-none"
+                                        placeholder={`x${index + 1}`}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -202,65 +247,21 @@ function matrixinvertion() {
                             <div className='text-xl mt-3'>
                                 result
                             </div>
-                            <BlockMath math={`
-                          \MatrixA
-                          \\begin{bmatrix}
-                          \\begin{matrix}
-                          ${normalmatrix.map((row, rowIndex) => (
-                                Array.isArray(row)
-                                    ? row.map((value, colIndex) => {
-                                        return (rowIndex === 0 && colIndex === 0)
-                                            ? `${value}`
-                                            : value
-                                    }).join(' & ')
-                                    : ''
-                            )).join(' \\\\\n')}
-                          \\end{matrix}
-                          \\end{bmatrix}`
-                            } />
 
-                            {anser && anser.stepElit && (
-                                <div>
-                                    {anser.stepElit.map((step, index) => (
-                                        <div key={index} className='mb-4'>
-                                            <BlockMath
-                                                math={`
-                                                    ${`MatrixA \\ step${index + 1}`}
-                                                    \\begin{bmatrix}
-                                                    ${step.map(
-                                                    row => row.map(value => `${value}`)
-                                                        .join(' & '))
-                                                        .join(' \\\\ ')}
-                                                    \\end{bmatrix}`}
-                                            />
-                                        </div>
-                                    ))}
-                                    <div>
-                                        {anser.anserI.map((step, index) => (
-                                            <div key={index} className='mb-4'>
-                                                <BlockMath
-                                                    math={`
-                                                  ${`MatrixI \\ step${index + 1}`}
-                                                  \\begin{bmatrix}
-                                  ${step.map(
-                                                        row => row.map(value => `${value}`)
-                                                            .join(' & '))
-                                                            .join(' \\\\ ')}
-                              \\end{bmatrix}`}
-                                                />
-                                            </div>
-                                        ))}
+                            <BlockMath math={`${anser.anserX}`}></BlockMath>
+                            <div>
+                            {anser.arrX && anser.arrX.map((step, index) => (
+                                    <div key={index} className='mb-4'>
+                                        <BlockMath
+                                            math={``}
+                                        />
                                     </div>
-                                </div>
+                                ))}
 
-                            )}
-
-
-                            <BlockMath math={`MatrixI \\ * \\ MatrixB \\${anser.anserX}`}></BlockMath>
+                            </div>
                         </div>
 
                     )}
-
                 </div>
             </div>
 
@@ -268,4 +269,4 @@ function matrixinvertion() {
     )
 }
 
-export default matrixinvertion
+export default Jacobipage

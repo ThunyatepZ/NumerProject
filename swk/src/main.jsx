@@ -26,6 +26,7 @@ import NEWTONDIVIDED from './inter/newtondiv.jsx';
 import Conjugate from './linear/pageAGB/Conjugate.jsx';
 import GaussPage from './linear/pageAGB/Gauss.jsx';
 import GaussJordan from './linear/pageAGB/GaussJordan.jsx';
+import Jacobipage from './linear/pageAGB/JacobiPage.jsx';
 import CarmerPage from './linear/pageAGB/LinearAGB.jsx';
 import Ludecomposition from './linear/pageAGB/Ludecomposition.jsx';
 import MINV from './linear/pageAGB/matrixinvertion.jsx';
@@ -105,6 +106,10 @@ const router = createBrowserRouter([
     {
       path : "conjugate",
       element : <Conjugate/>
+    },
+    {
+      path : "Jacobi",
+      element : <Jacobipage/>
     }
     ]
   }

@@ -10,8 +10,8 @@ function SubmenuAGB() {
             <li><Link to='/Home/GaussJordan'>Gauss Jordan Elimination</Link></li>
             <li><Link to='/Home/MatrixINV'>Matrix invertion</Link></li>
             <li><Link to='/Home/LU_decomposit'>LU decomposition methods</Link></li>
-            <li><Link to='/Home/MatrixINV'>Jacobi iteration method</Link></li>
-            <li><Link to='/Home/MatrixINV'>Conjugate Gradient Method</Link></li>
+            <li><Link to='/Home/Jacobi'>Jacobi iteration method</Link></li>
+            <li><Link to='/Home/conjugate'>Conjugate Gradient Method</Link></li>
         </ul>
     </div>
     );
