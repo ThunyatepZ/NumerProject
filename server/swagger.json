@@ -12,8 +12,8 @@
     "https"
   ],
   "paths": {
-    "/bisec": {
-      "post": {
+    "/testswagger": {
+      "get": {
         "description": "",
         "responses": {
           "200": {
@@ -22,9 +22,42 @@
         }
       }
     },
-    "/testswagger": {
+    "/getdata": {
       "get": {
         "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/test": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "equation": {
+                  "example": "any"
+                },
+                "Xstart": {
+                  "example": "any"
+                },
+                "Xend": {
+                  "example": "any"
+                },
+                "Error": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"

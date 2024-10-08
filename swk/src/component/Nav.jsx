@@ -13,7 +13,7 @@ export default function NAV(){
                 </div>
                 <ul className="flex">
                     <li className="mx-3 py-1"><Link to="/">-</Link></li>
-                    <li className="mx-3 py-1"><Link to="/Home/log">Log</Link></li>
+                    <li className="mx-3 py-1"><Link to="/Home/Saved_Data">Log</Link></li>
                     <li className="text-white mx-3">
                         <BasicMenu/>
                     </li>

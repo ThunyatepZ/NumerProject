@@ -1,14 +1,18 @@
+import axios from 'axios';
 import { all, create } from 'mathjs';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GraphicalJS from '../CalculateFornt/Graphical';
 import MathEquation from '../component/Boxmath';
 import Graphishow from '../component/graph';
 import Submenuroot from '../component/submenu.root';
 import BasicTable from '../component/Table';
+const test = 'http://localhost:5000/api/test'
+
 
 const math = create(all);
 
 function Graphical() {
+    const type = "root"
     const [FX, setFX] = useState("");
 
     const [form, setForm] = useState({});
@@ -31,10 +35,19 @@ function Graphical() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const typeform = {...form,type : type}
         let G = await GraphicalJS(form);
         setresult(G);
         result.xans.sort((a, b) => a - b);
+
+        await axios.post(test,typeform).then((res) => {
+            console.log(res.data)
+        })
     };
+
+    useEffect(()=>{
+        console.log(type)
+    },[result])
 
     return (
         <div className='bg-#1D232A'>

@@ -76,7 +76,8 @@ export default function Bisection101({Xstart,Xend,Error,equation}){
                     reErr: ErrorRe,
                     ITER : Iteration,
                     Mgx : maingraphX,
-                    Mgy: maingraphY
+                    Mgy: maingraphY,
+                    status : "success"
                 })
             }
             else{

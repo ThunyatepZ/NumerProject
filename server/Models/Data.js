@@ -5,7 +5,9 @@ const DataSchema = mongoose.Schema({
     Xstart: String,
     Xend: String,
     Error: String,
-
+    type : String,
+    anser : String,
+    subtype : String
 }, {timestamps: true})
 
 module.exports = mongoose.model('Keepdata',DataSchema)

@@ -8,8 +8,10 @@ import './index.css';
 // Pages
 import Home from './page/Home.jsx';
 import Lobbie from './page/Lobbie.jsx';
-import Logkeeping from './page/Logkeeping.jsx';
 import Registering from './page/register.jsx';
+
+import Saved from './Saved.jsx';
+
 
 // Root of equation
 import Bisection from './page/Bisection.jsx';
@@ -51,10 +53,6 @@ const router = createBrowserRouter([
       {
         path: "Rootequation",
         element: <Graphical/>,
-      },
-      {
-        path: "log",
-        element: <Logkeeping/>
       },
       {
       path: "REGISTER",
@@ -115,6 +113,10 @@ const router = createBrowserRouter([
     {
       path : "GaussSeidel",
       element : <GaussSeidel/>
+    },
+    {
+      path : "Saved_Data",
+      element : <Saved/>
     }
     ]
   }
