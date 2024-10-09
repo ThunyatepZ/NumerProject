@@ -31,3 +31,20 @@ exports.SendToDB = async(req,res)=>{
     }
 }
 
+exports.getExampledata = async(req,res)=>{
+    try{
+        const lisdata = await Graphical.find({}).exec()
+        res.send(lisdata)
+    }catch(err){
+        console.log(err)
+    }
+}
+
+exports.savedatatest = async(req,res)=>{
+    try{
+        const S = await Graphical(req.body).save()
+        res.json(S)
+    }catch(err){
+        console.log(err)
+    }
+}

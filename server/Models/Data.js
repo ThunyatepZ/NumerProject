@@ -10,4 +10,4 @@ const DataSchema = mongoose.Schema({
     subtype : String
 }, {timestamps: true})
 
-module.exports = mongoose.model('Keepdata',DataSchema)
+module.exports = mongoose.model('Graphical',DataSchema)
