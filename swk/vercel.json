@@ -9,6 +9,9 @@
         "deploymentEnabled": {
         "main": true
         }
-    }
+    },
+    "dev": "node app.js",
+    "build": "npm run build"
+
 
 }

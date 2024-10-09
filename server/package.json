@@ -4,9 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server",
-    "dev": "node app.js",
-    "build": "npm run build"
+    "start": "nodemon server"
+
   },
   "keywords": [],
   "author": "",
