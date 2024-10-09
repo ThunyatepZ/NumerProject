@@ -10,10 +10,5 @@
         "main": true
         }
     }
-    ,
-    "scripts": {
-        "dev": "node app.js",
-        "build": "npm run build",
-        "start": "node app.js"
-      }
+
 }
