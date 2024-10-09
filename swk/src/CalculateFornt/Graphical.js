@@ -71,9 +71,9 @@ export default function GraphicalJS({Xstart,Xend,Error,equation}){
                     it: keepiter,
                     yans: keepFX,
                     err: Keeperror,
-                    type: 'Graphical',
                     Mgx : maingraphX,
-                    Mgy: maingraphY
+                    Mgy: maingraphY,
+                    status : "success"
                     
 
                 }
@@ -103,9 +103,9 @@ export default function GraphicalJS({Xstart,Xend,Error,equation}){
                     it: keepiter,
                     yans: keepFX,
                     err: Keeperror,
-                    type: 'Graphical',
                     Mgx : maingraphX,
-                    Mgy: maingraphY
+                    Mgy: maingraphY,
+                    status : "success"
                     
                 }
             )

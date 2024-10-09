@@ -1,14 +1,13 @@
 import axios from 'axios';
 import { all, create } from 'mathjs';
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import GraphicalJS from '../CalculateFornt/Graphical';
 import MathEquation from '../component/Boxmath';
 import Graphishow from '../component/graph';
 import Submenuroot from '../component/submenu.root';
 import BasicTable from '../component/Table';
 const test = 'http://localhost:5000/api/test'
-
-
 const math = create(all);
 
 function Graphical() {
@@ -17,6 +16,7 @@ function Graphical() {
 
     const [form, setForm] = useState({});
     const [result, setresult] = useState({});
+    const [copy,setcopy] = useState({})
 
     const equation = 'f(x) = ';
 
@@ -32,17 +32,40 @@ function Graphical() {
             [e.target.name]: e.target.value
         });
     };
+    const handlesubmit = async (e)=>{
+        e.preventDefault()
+        const Graphical = await GraphicalJS(form)
+        setresult(Graphical)
+        setcopy({...Graphical})
+    }
 
-    const handleSubmit = async (e) => {
+    const savetodatabase = async (e) => {
         e.preventDefault();
-        const typeform = {...form,type : type}
-        let G = await GraphicalJS(form);
-        setresult(G);
-        result.xans.sort((a, b) => a - b);
+        if(result.status != "success"){
+            Swal.fire({
+                title: "Error!",
+                text: "you already save it",
+                icon: "error"
+            });
+        }
+        else{
+            const typeform = {...form,type : type,anser : result.NewAnser,subtype : "Graphical"}
+            await axios.post(test,typeform).then((res)=>{
+                if(res.data == "Don't save"){
+                    console.log(res.data)
+                }
+                else{
+                    Swal.fire({
+                        title: "Save success",
+                        text: "Thank for help",
+                        icon: "success"
+                    });
+                    console.log(res.data)
+                }
 
-        await axios.post(test,typeform).then((res) => {
-            console.log(res.data)
-        })
+            })
+                result.status = "false"
+        }
     };
 
     useEffect(()=>{
@@ -64,7 +87,7 @@ function Graphical() {
                         <MathEquation equation={FX} />
                     </div>
                     <div className='text-center pt-5'>
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handlesubmit}>
                             <input
                                 type="text"
                                 name='equation'
@@ -95,6 +118,7 @@ function Graphical() {
                             />
                             <br />
                             <button type='submit' className='bg-green-400 text-black p-3 rounded mt-3'>Send</button>
+                            <button type='button' className='bg-slate-400 p-3 mt-3 rounded' onClick={savetodatabase}>save</button>
                         </form>
                     </div>
 
@@ -124,10 +148,10 @@ function Graphical() {
                     <div className='w-full flex justify-center items-center mt-10'>
                         <div className='w-[70%]'>
                             <BasicTable
-                                x={result.xans}
-                                y={result.yans}
-                                errorFAC={result.err}
-                                iterative={result.it}
+                                x={copy.xans}
+                                y={copy.yans}
+                                errorFAC={copy.err}
+                                iterative={copy.it}
                             />
                         </div>
                     </div>

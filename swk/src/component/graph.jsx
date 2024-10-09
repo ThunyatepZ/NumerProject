@@ -5,10 +5,13 @@ import Plot from "react-plotly.js";
 const math = create(all);
 
 export function Graphishow({ x = [], y = [],check, maingraphx,maingraphy,XG,YG,gotox,gotoy}) {
+  let xcp = [...x]
+  let ycp = [...y]
   try {
+
     if(check === true){
-      x.sort((a, b) => a - b);
-      y.sort((a, b) => a - b);
+      xcp.sort((a, b) => a - b);
+      ycp.sort((a, b) => a - b);
     }
 
   } catch (err) {
@@ -26,8 +29,8 @@ export function Graphishow({ x = [], y = [],check, maingraphx,maingraphy,XG,YG,g
         }}
         data={[
           {
-            x: check === "One" && x.length > 0 ?  [1,...x] : x,
-            y: check === "One" && y.length > 0 ? [1,...y] : y,
+            x: check === "One" && x.length > 0 ?  [1,...x] : xcp,
+            y: check === "One" && y.length > 0 ? [1,...y] : ycp,
             name : check === "One" && x.length > 0 ? 'Onepoint' : 'Value',
             line: check === "One" ? { shape: "hv", color: "red" } : 1,
             mode: check === 'newton' ? "markers" : "markers+lines",

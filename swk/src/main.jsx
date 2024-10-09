@@ -22,7 +22,7 @@ import Onepointiter from './page/Onepoint.jsx';
 import SECANTmethod from './page/secant.jsx';
 
 // Interpolation
-import NEWTONDIVIDED from './inter/newtondiv.jsx';
+import NEWTONDIVIDED from './inter/pageinter/newtondiv.jsx';
 
 // Linear Algebra
 import Conjugate from './linear/pageAGB/Conjugate.jsx';

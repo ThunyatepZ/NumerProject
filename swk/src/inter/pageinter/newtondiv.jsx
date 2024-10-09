@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 function NEWTONDIVIDED() {
-    const [numFields, setNumFields] = useState(1); // จำนวนช่องอินพุต
-    const [xValues, setXValues] = useState([]); // ค่าของ X
-    const [fxValues, setFxValues] = useState([]); // ค่าของ F(x)
+    const [numFields, setNumFields] = useState(1);
+    const [xValues, setXValues] = useState([]);
+    const [fxValues, setFxValues] = useState([]);
 
-    // ฟังก์ชันเปลี่ยนจำนวนช่อง
+
     const handleNumFieldsChange = (e) => {
         const value = parseInt(e.target.value, 10);
         if (!isNaN(value) && value >= 0) {
@@ -19,19 +19,28 @@ function NEWTONDIVIDED() {
         }
     };
 
-    // ฟังก์ชันอัปเดตค่า X
+
     const handleXChange = (index, value) => {
         const updatedXValues = [...xValues];
         updatedXValues[index] = value;
         setXValues(updatedXValues);
     };
 
-    // ฟังก์ชันอัปเดตค่า F(x)
+
     const handleFxChange = (index, value) => {
         const updatedFxValues = [...fxValues];
         updatedFxValues[index] = value;
         setFxValues(updatedFxValues);
     };
+
+    // useEffect(()=>{
+    //     console.log(xValues)
+    //     console.log(fxValues)
+    // },[xValues,fxValues])
+
+    const handlesubmit = async(e)=>{
+        console.log(xValues,fxValues)
+    }
 
 
     return (
@@ -53,6 +62,7 @@ function NEWTONDIVIDED() {
                         className="border rounded p-2 mb-4"
                         placeholder="x value wanna find"
                     />
+                    <button className='bg-green-500 p-3 rounded-md' onClick={handlesubmit}>send</button>
                 </div>
 
                 {numFields > 0 && numFields <= 10 && (
