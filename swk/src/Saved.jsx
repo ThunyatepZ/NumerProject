@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-const savedata = "http://localhost:5000/api/getdata"
+const savedata = "https://numer-project-de3b.vercel.app/api/getdata"
 
 function Saved() {
     const [data,setdata] = useState([])
