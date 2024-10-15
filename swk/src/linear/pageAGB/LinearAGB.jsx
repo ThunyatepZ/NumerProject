@@ -206,7 +206,7 @@ function CarmerPage() {
             {anser.Matrix && Array.isArray(anser.Matrix) && matrixB && Array.isArray(matrixB) && (
               <BlockMath
                 math={`
-        \det(A)
+        \Matrix \\ A
         \\begin{bmatrix}
         
         \\begin{matrix}

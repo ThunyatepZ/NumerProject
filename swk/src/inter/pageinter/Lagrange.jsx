@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-
-
-function NEWTONDIVIDED() {
+import Submenuinter from '../../component/submenuinter';
+import LgCal from '../calculateInter/lagrange';
+function Largrange() {
     const [numFields, setNumFields] = useState(1);
     const [xValues, setXValues] = useState([]);
     const [fxValues, setFxValues] = useState([]);
@@ -16,7 +16,7 @@ function NEWTONDIVIDED() {
             setNumFields(value);
             setXValues(Array(value).fill(''));
             setFxValues(Array(value).fill(''));
-            setCheckedIndices([]); // รีเซ็ต checkedIndices เมื่อจำนวนฟิลด์เปลี่ยน
+            setCheckedIndices([]);
         } else {
             setNumFields(0);
             setXValues([]);
@@ -55,8 +55,14 @@ function NEWTONDIVIDED() {
             X[i] = xValues[checkedIndices[i]]
             Y[i] = fxValues[checkedIndices[i]]
         }
+        if(X.length == 0 ||fxValues.length == 0 || xValues.length == 0){
+          alert("มุฮ่าๆๆๆ")
+          return 1
+        }
         console.log(data)
-        console.log(X,Y)
+        const dd = LgCal(X,Y,data)
+        console.log(dd)
+        // console.log(X,Y)
         // console.log('Checked Indices:', checkedIndices);
     };
 
@@ -68,9 +74,10 @@ function NEWTONDIVIDED() {
 
     return (
         <div className=''>
-            <div className='text-center text-3xl'>
-                <h1 className='text-white pt-10 pb-5'>Interpolation : Newton's Divided Difference</h1>
-                <div className="divider divider-neutral"></div>
+            <div className='text-center text-3xl mb-6'>
+                <h1 className='text-white pt-10 pb-5'>Interpolation : Lagrange</h1>
+                <div className="divider divider-neutral"><Submenuinter></Submenuinter></div>
+
             </div>
             <div className="flex flex-col items-center">
                 <div className='flex justify-items-center items-center gap-2'>
@@ -124,4 +131,4 @@ function NEWTONDIVIDED() {
     );
 }
 
-export default NEWTONDIVIDED;
+export default Largrange;

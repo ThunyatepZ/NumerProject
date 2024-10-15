@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-function SubmenuAGB() {
+function Submenuinter() {
     return(
     <div className="dropdown dropdown-right">
         <div tabIndex={0} role="button" className="btn m-1">Another solution</div>
@@ -18,4 +18,4 @@ function SubmenuAGB() {
     );
 }
 
-export default SubmenuAGB
+export default Submenuinter

@@ -21,7 +21,7 @@ function Submenuroot() {
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
         >
-          Sol
+          Another solution
         </Button>
         <Menu
           id="basic-menu"
@@ -38,6 +38,7 @@ function Submenuroot() {
           <MenuItem onClick={handleClose}><Link to={"/Home/Onepoint"}>One-point iteration method</Link></MenuItem>
           <MenuItem onClick={handleClose}><Link to={"/Home/Newtonrapson"}>Newton-Raphson Method</Link></MenuItem>
           <MenuItem onClick={handleClose}><Link to={"/Home/Secantmed"}>Secant Method</Link></MenuItem>
+
         </Menu>
       </div>
     );

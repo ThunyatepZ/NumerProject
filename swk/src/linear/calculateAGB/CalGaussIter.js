@@ -31,7 +31,7 @@ function CalGaussIter(props){
         if(correct != A.length-1){
             console.log(x)
         }
-        if(Iteration >= 100){
+        if(Iteration >= 1000){
             break
         }
         Iteration++

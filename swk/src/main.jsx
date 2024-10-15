@@ -22,8 +22,8 @@ import Onepointiter from './page/Onepoint.jsx';
 import SECANTmethod from './page/secant.jsx';
 
 // Interpolation
+import Largrange from './inter/pageinter/Lagrange.jsx';
 import NEWTONDIVIDED from './inter/pageinter/newtondiv.jsx';
-
 // Linear Algebra
 import Conjugate from './linear/pageAGB/Conjugate.jsx';
 import GaussPage from './linear/pageAGB/Gauss.jsx';
@@ -117,6 +117,10 @@ const router = createBrowserRouter([
     {
       path : "Saved_Data",
       element : <Saved/>
+    },
+    {
+      path : "Lagrange",
+      element : <Largrange/>
     }
     ]
   }

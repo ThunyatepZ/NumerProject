@@ -117,8 +117,10 @@ function Graphical() {
                                 placeholder='Error'
                             />
                             <br />
+                            <div className='flex justify-center gap-2'>
                             <button type='submit' className='bg-green-400 text-black p-3 rounded mt-3'>Send</button>
                             <button type='button' className='bg-slate-400 p-3 mt-3 rounded' onClick={savetodatabase}>save</button>
+                            </div>
                         </form>
                     </div>
 
