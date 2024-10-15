@@ -1,11 +1,11 @@
 const Graphical = require('../Models/Data')
-exports.testswagger = async(req,res)=>{
-    try{
-        res.send("Hello");
-    }catch(err){
-        console.log(err)
-    }
-}
+// exports.testswagger = async(req,res)=>{
+//     try{
+//         res.send("Hello");
+//     }catch(err){
+//         console.log(err)
+//     }
+// }
 
 exports.listdata = async(req,res)=>{
     try{
@@ -31,20 +31,20 @@ exports.SendToDB = async(req,res)=>{
     }
 }
 
-exports.getExampledata = async(req,res)=>{
-    try{
-        const lisdata = await Graphical.find({}).exec()
-        res.send(lisdata)
-    }catch(err){
-        console.log(err)
-    }
-}
+// exports.getExampledata = async(req,res)=>{
+//     try{
+//         const lisdata = await Graphical.find({}).exec()
+//         res.send(lisdata)
+//     }catch(err){
+//         console.log(err)
+//     }
+// }
 
-exports.savedatatest = async(req,res)=>{
-    try{
-        const S = await Graphical(req.body).save()
-        res.json(S)
-    }catch(err){
-        console.log(err)
-    }
-}
+// exports.savedatatest = async(req,res)=>{
+//     try{
+//         const S = await Graphical(req.body).save()
+//         res.json(S)
+//     }catch(err){
+//         console.log(err)
+//     }
+// }

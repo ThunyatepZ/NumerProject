@@ -1,22 +1,26 @@
-const express = require('express')
-const NumerRouters = require('./Routers/ApiNumer')
-const { readdirSync } = require('fs')
-const morgan = require('morgan')
-const app = express()
-const cors = require('cors')
-const bodyParser = require('body-parser')
-const conectDB = require('./Models/config/db')
+const express = require('express');
+const NumerRouters = require('./Routers/ApiNumer'); // ถ้ามี Router อื่น ๆ สามารถนำเข้าได้ที่นี่
+const morgan = require('morgan');
+const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const conectDB = require('./Models/config/db');
+const router = require('./Routers/Index')
 
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json')
-// const swaggerAutogen = require('./Swagger');
+const swaggerDocument = require('./swagger.json');
 
-conectDB()
+conectDB();
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use(morgan('dev'))
-app.use(cors())
-app.use(bodyParser.json({ limit: '10mb' }))
+app.use(morgan('dev'));
+app.use(cors());
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use('/api/',router())
+// กำหนด Router ที่ต้องการใช้โดยตรง
+// app.use('/api/numer', NumerRouters);
+// คุณสามารถเพิ่ม Router อื่น ๆ ได้ที่นี่ เช่น
+// const AnotherRouter = require('./Routers/AnotherRouter');
+// app.use('/api/another', AnotherRouter);
 
-readdirSync('./Routers').map((r)=>app.use('/api',require('./Routers/' + r)))
-
-app.listen(5000,()=> console.log('Server is running on port 5000'))
+app.listen(5000, () => console.log('Server is running on port 5000'));
