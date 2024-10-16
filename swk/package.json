@@ -17,6 +17,7 @@
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.5",
     "katex": "^0.16.11",
     "mathjs": "^13.1.1",
     "plotly.js": "^2.33.0",
@@ -27,7 +28,7 @@
     "react-plotly.js": "^2.6.0",
     "react-router-dom": "^6.24.1",
     "styled-components": "^6.1.11",
-    "sweetalert2": "^11.14.1"
+    "sweetalert2": "^11.6.13"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

@@ -9,6 +9,7 @@ const router = require('./Routers/Index')
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+// const swaggerAutogen = require('./Swagger');
 
 conectDB();
 
@@ -17,10 +18,5 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use('/api/',router())
-// กำหนด Router ที่ต้องการใช้โดยตรง
-// app.use('/api/numer', NumerRouters);
-// คุณสามารถเพิ่ม Router อื่น ๆ ได้ที่นี่ เช่น
-// const AnotherRouter = require('./Routers/AnotherRouter');
-// app.use('/api/another', AnotherRouter);
 
 app.listen(5000, () => console.log('Server is running on port 5000'));

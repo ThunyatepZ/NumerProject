@@ -12,16 +12,6 @@
     "https"
   ],
   "paths": {
-    "/testswagger": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/getdata": {
       "get": {
         "description": "",
@@ -58,26 +48,6 @@
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/data": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/testpost": {
-      "post": {
-        "description": "",
         "responses": {
           "200": {
             "description": "OK"
