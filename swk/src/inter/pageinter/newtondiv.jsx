@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Submenuinter from '../../component/submenuinter';
 
 function NEWTONDIVIDED() {
     const [numFields, setNumFields] = useState(1);
@@ -70,7 +70,7 @@ function NEWTONDIVIDED() {
         <div className=''>
             <div className='text-center text-3xl'>
                 <h1 className='text-white pt-10 pb-5'>Interpolation : Newton's Divided Difference</h1>
-                <div className="divider divider-neutral"></div>
+                <div className="divider divider-neutral pb-4"><Submenuinter></Submenuinter></div>
             </div>
             <div className="flex flex-col items-center">
                 <div className='flex justify-items-center items-center gap-2'>

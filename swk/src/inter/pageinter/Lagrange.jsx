@@ -9,7 +9,8 @@ function Largrange() {
     const X = []
     const Y = []
     const [data,setdata] = useState()
-    const [formXY,setformXY] = useState({})
+    const [anser,setanser] = useState()
+    
     const handleNumFieldsChange = (e) => {
         const value = parseInt(e.target.value, 10);
         if (!isNaN(value) && value >= 0) {
@@ -61,7 +62,7 @@ function Largrange() {
         }
         console.log(data)
         const dd = LgCal(X,Y,data)
-        console.log(dd)
+        setanser(dd)
         // console.log(X,Y)
         // console.log('Checked Indices:', checkedIndices);
     };
@@ -124,7 +125,15 @@ function Largrange() {
                                 />
                             </div>
                         ))}
+                        <div>
+                            {anser && (
+                                <div className='text-black'>
+                                    Anser is : {anser.ansum}
+                                </div>
+                            )}
+                        </div>
                     </div>
+                    
                 )}
             </div>
         </div>
