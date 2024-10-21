@@ -24,6 +24,7 @@ import SECANTmethod from './page/secant.jsx';
 // Interpolation
 import Largrange from './inter/pageinter/Lagrange.jsx';
 import NEWTONDIVIDED from './inter/pageinter/newtondiv.jsx';
+import SPINE from './inter/pageinter/spine.jsx';
 // Linear Algebra
 import Conjugate from './linear/pageAGB/Conjugate.jsx';
 import GaussPage from './linear/pageAGB/Gauss.jsx';
@@ -121,6 +122,10 @@ const router = createBrowserRouter([
     {
       path : "Lagrange",
       element : <Largrange/>
+    },
+    {
+      path : "spine",
+      element : <SPINE/>
     }
     ]
   }
