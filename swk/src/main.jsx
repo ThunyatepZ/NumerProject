@@ -12,6 +12,9 @@ import Registering from './page/register.jsx';
 
 import Saved from './Saved.jsx';
 
+//Regression
+import MultipleRegression from './regression/page/MultipleRegression.jsx';
+import SIMPLEREGRESSION from './regression/page/simpleregression.jsx';
 
 // Root of equation
 import Bisection from './page/Bisection.jsx';
@@ -126,6 +129,14 @@ const router = createBrowserRouter([
     {
       path : "spine",
       element : <SPINE/>
+    },
+    {
+      path : "reg",
+      element : <SIMPLEREGRESSION/>
+    },
+    {
+      path : "regMulti",
+      element : <MultipleRegression/>
     }
     ]
   }
