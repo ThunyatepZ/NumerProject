@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { BlockMath } from 'react-katex';
 import SubmenuREG from '../../component/submenuReg';
 function MultipleRegression() {
@@ -11,6 +12,7 @@ function MultipleRegression() {
     const [data, setdata] = useState()
     const [anser, setanser] = useState()
     const [Morder, setMorder] = useState()
+    const [xorder,setxorder] = useState()
 
     const handleNumFieldsChange = (e) => {
         const value = parseInt(e.target.value, 10);
@@ -68,11 +70,9 @@ function MultipleRegression() {
         // console.log('Checked Indices:', checkedIndices);
     };
 
-    // useEffect(()=>{
-    //     for(let i = 0;i < checkedIndices.length;i++){
-    //         console.log(checkedIndices[i])
-    //     }
-    // },[])
+    useEffect(() => {
+        console.log(xorder);
+      }, [xorder]);
 
     return (
         <div className=''>
@@ -101,7 +101,10 @@ function MultipleRegression() {
                 {numFields > 0 && numFields <= 10 && (
                     <div className='bg-white p-10 rounded-lg'>
                         <h1 className='text-black mb-4'>Data</h1>
+                        <div className='flex gap-4'>
                         <input type="text" placeholder='M order' className='border rounded p-2 flex-1 bg-white text-black mb-6' onChange={(e) => setMorder(e.target.value)} />
+                        <input type="text" placeholder='number of X' className='border rounded p-2 flex-1 bg-white text-black mb-6' onChange={(e) => setxorder(e.target.value)}/>
+                        </div>
                         {Array.from({ length: numFields }, (_, index) => (
                             <div key={index} className="flex mb-2 gap-3">
                                 <input
@@ -110,14 +113,16 @@ function MultipleRegression() {
                                     checked={checkedIndices.includes(index)}
                                     onChange={() => handleCheckboxChange(index)}
                                 />
-                                <input
-                                    type="text"
-                                    value={xValues[index] || ''}
-                                    onChange={(e) => handleXChange(index, e.target.value)}
-                                    className="border rounded p-2 flex-1 bg-white text-black"
-                                    placeholder={`x${index + 1}`}
-                                />
 
+                                {Array.from({length: xorder},(_,index1) =>(
+                                <input
+                                type="text"
+                                value={xValues[index] || ''}
+                                onChange={(e) => handleXChange(index, e.target.value)}
+                                className="border rounded p-2 flex-1 bg-white text-black"
+                                placeholder={`x${index1 + 1}.${index + 1}`}
+                            />
+                                ))}
                                 <input
                                     type="text"
                                     value={fxValues[index] || ''}
