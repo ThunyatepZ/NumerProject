@@ -11,6 +11,9 @@ import Lobbie from './page/Lobbie.jsx';
 import Registering from './page/register.jsx';
 
 //intrigration
+import CSP from './INTRI/page/compositsimpson.jsx';
+import CompositTP from './INTRI/page/compositTrapezoidal.jsx';
+import SIMPSON from './INTRI/page/simpson.jsx';
 import SINGLETROPZIODAL from './INTRI/page/singleTrapezoidal.jsx';
 
 import Saved from './Saved.jsx';
@@ -144,6 +147,18 @@ const router = createBrowserRouter([
     {
       path : "STP",
       element : <SINGLETROPZIODAL/>
+    },
+    {
+      path : "CTP",
+      element : <CompositTP/>
+    },
+    {
+      path : "Simpson",
+      element : <SIMPSON/>
+    },
+    {
+      path : "CSimpson",
+      element : <CSP/>
     }
     ]
   }

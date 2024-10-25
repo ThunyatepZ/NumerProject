@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { BlockMath } from 'react-katex'
 import SUBMENUINTRIGRATION from '../../component/submenuIntrogration'
-import singleTrapezoidalcal from '../calculete/singleTrapezoidalcal'
-function singleTrapezoidal() {
+import simpsoncalculate from '../calculete/simpsoncal'
+function simpson() {
     const [form,setform] = useState({})
     const [anser,setanser] = useState({})
     const handlechange = (e) => {
@@ -14,7 +14,7 @@ function singleTrapezoidal() {
     const handlesubmit = (e) =>{
       e.preventDefault()
       console.log(form)
-      let data = singleTrapezoidalcal(form)
+      let data = simpsoncalculate(form)
       setanser(data)
     }
     const lowerLimit = form.dataA !== undefined ? form.dataA : '';
@@ -23,7 +23,7 @@ function singleTrapezoidal() {
   return (
     <div>
         <div className='text-center text-3xl mb-6'>
-            <h1 className='text-white pt-10 pb-5'>Intrigration : SingleTrapzoidal</h1>
+            <h1 className='text-white pt-10 pb-5'>Intrigration : Simpson</h1>
             <div className='divider divider-neutral'><SUBMENUINTRIGRATION></SUBMENUINTRIGRATION></div>
         </div>
         <div className='flex justify-center items-center mb-3'>
@@ -55,4 +55,4 @@ function singleTrapezoidal() {
   )
 }
 
-export default singleTrapezoidal
+export default simpson
