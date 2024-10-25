@@ -38,7 +38,8 @@ function LgCal(x,y,data){
         y : ycopy,
         D : data1,
         ansum : ansersum,
-        ans : anser
+        ans : anser,
+        mode : "inter"
     })
 }
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Submenuinter from '../../component/submenuinter';
 import LgCal from '../calculateInter/lagrange';
+import GraphforReg from '../../component/GraphforReg';
 function Largrange() {
     const [numFields, setNumFields] = useState(1);
     const [xValues, setXValues] = useState([]);
@@ -63,8 +64,6 @@ function Largrange() {
         console.log(data)
         const dd = LgCal(X,Y,data)
         setanser(dd)
-        // console.log(X,Y)
-        // console.log('Checked Indices:', checkedIndices);
     };
 
     // useEffect(()=>{
@@ -135,7 +134,17 @@ function Largrange() {
                     </div>
                     
                 )}
+
             </div>
+            {anser && (
+            <div className=''>
+            <div className='flex justify-center mt-10'>
+                <GraphforReg props={anser}/>
+            </div>
+        </div>
+            )}
+
+
         </div>
     );
 }

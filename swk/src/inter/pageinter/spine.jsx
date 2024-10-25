@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Submenuinter from '../../component/submenuinter';
 import Spinecal from '../calculateInter/Spine';
+import GraphforReg from '../../component/GraphforReg';
 function spine() {
     const [anser,setanser] = useState(null) ;
     const [numFields,setNumFields] = useState(1)
     const [xvalue,setXValues] = useState([])
     const [yvalue,setYValues] = useState([])
-    const [showanser,setshowanser] = useState()
+    const [showanser,setshowanser] = useState({})
     let X = []
     let Y = []
     const [checkedIndices, setCheckedIndices] = useState([]);
@@ -94,12 +95,14 @@ return (
                 ))}
             {showanser &&(
             <div className='text-black'>
-                Anser = {showanser.dataanser}
+                Anser = {showanser.ansum}
             </div>
         )}
             </div>
         )}
-
+            <div className='flex justify-center mt-10'>
+                <GraphforReg props={showanser}/>
+            </div>
         </div>
     </div>
   )

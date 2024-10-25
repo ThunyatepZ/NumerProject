@@ -10,6 +10,9 @@ import Home from './page/Home.jsx';
 import Lobbie from './page/Lobbie.jsx';
 import Registering from './page/register.jsx';
 
+//intrigration
+import SINGLETROPZIODAL from './INTRI/page/singleTrapezoidal.jsx';
+
 import Saved from './Saved.jsx';
 
 //Regression
@@ -137,6 +140,10 @@ const router = createBrowserRouter([
     {
       path : "regMulti",
       element : <MultipleRegression/>
+    },
+    {
+      path : "STP",
+      element : <SINGLETROPZIODAL/>
     }
     ]
   }

@@ -74,11 +74,30 @@ export default function SIMPLE(x, y, data, Order) {
     for(let i = 0;i <= Order;i++){
         i == 0 ? sumanser = sumanser + matrixA[i] : sumanser = sumanser + (matrixA[i] * (math.pow(data,i)))
     }
-    console.log(sumanser)
+    //Create Regression Line
+    let j = 1
+    let regline = 0
+    let xreg = []
+    let yreg = []
+    for(let i = xcopy[0];i < xcopy[xcopy.length - 1];i+=0.1){
+        for(let j = 0 ; j <=Order;j++){
+            i == xcopy[0] ? regline = regline + matrixA[i] : regline = regline + (matrixA[i] * (math.pow(i,j)))
+        }
+        xreg.push(i)
+        yreg.push(regline)
+        j+=0.1
+    }
+    console.log(xreg,yreg)
     return({
         anserMxA: MatrixOrder,
         anserMxB: MatrixB,
         show: matrixA,
-        ansersum: parseFloat(sumanser)
+        ansersum: parseFloat(sumanser),
+        mode : "regression",
+        x : xcopy,
+        y : ycopy,
+        Rliney : yreg,
+        Rlinex : xreg
+
     })
 }

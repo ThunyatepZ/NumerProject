@@ -19,5 +19,5 @@ app.use(cors());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use('/api/',router())
 
-app.listen(5000, () =>
+app.listen(3000, () =>
     console.log('Server is running on port 5000'));//เปลี่ยนpath5000 to 3000เพราะ5000บนmacใช้ไม่ได้

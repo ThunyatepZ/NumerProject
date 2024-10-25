@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BlockMath } from 'react-katex';
 import SubmenuREG from '../../component/submenuReg';
 import SIMPLE from '../cal/simpRegress';
+import REAL from '../../component/realGraphForregression';
 function simpleregression() {
     const [numFields, setNumFields] = useState(1);
     const [xValues, setXValues] = useState([]);
@@ -9,6 +10,7 @@ function simpleregression() {
     const [checkedIndices, setCheckedIndices] = useState([]);
     const X = []
     const Y = []
+    const [ansForGraph,setanserForGraph] = useState({})
     const [data, setdata] = useState()
     const [anser, setanser] = useState()
     const [Morder, setMorder] = useState()
@@ -65,8 +67,7 @@ function simpleregression() {
         console.log(data)
         const dd = SIMPLE(X, Y, data, Morder)
         setanser(dd)
-        // console.log(X,Y)
-        // console.log('Checked Indices:', checkedIndices);
+        setanserForGraph(dd)
     };
 
     // useEffect(()=>{
@@ -160,15 +161,15 @@ function simpleregression() {
                         }).join('\\\\\n')}
                         \\\\\n
                         ${`anser = ${anser.ansersum}`}
-                        `
-                        
-                    
+                        `                 
                         }/>
-
-                        
                     </div>
                 )}
-
+                {anser && (
+                <div className='flex items-center mt-5'>
+                    <REAL props={ansForGraph}/>
+                </div>
+                )}
 
             </div>
         </div>
