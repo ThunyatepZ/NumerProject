@@ -1,10 +1,12 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import Falseposition from '../CalculateFornt/Flaseposition.js';
 import MathEquation from '../component/Boxmath';
 import Graphishow from '../component/graph.jsx';
 import Submenuroot from '../component/submenu.root';
 import BasicTable from '../component/Table.jsx';
-
+const test = 'http://localhost:5000/api/test'
 function Graphical() {
     const [FX, setFX] = useState("")
     const [Xstart, setXstart] = useState("")
@@ -53,8 +55,37 @@ function Graphical() {
         setresive(l)
     }
 
-
-
+    const savetodatabase = async(e) =>{
+        e.preventDefault()
+        const typeform = {
+            ...form,
+            type : "root",
+            anser : resive.X1,
+            subtype : "FalsePosition"
+        }
+        const dataobject = {
+            dataobject : typeform,
+            type : "test"
+        }
+        await axios.post(test,dataobject).then((res) =>{
+            if(res.data == "Already have it"){
+                Swal.fire({
+                    title: "Error!",
+                    text: "We already have this data on our database",
+                    icon: "error"
+                });
+            }
+            else{
+                Swal.fire({
+                    title: "Save success",
+                    text: "Thank for help",
+                    icon: "success"
+                });
+                console.log(res.data)
+            }
+        })
+    }
+    
 
 
 
@@ -79,7 +110,11 @@ function Graphical() {
                     <input type="text" name='Xstart' className='text-center bg-white py-3 mt-2 mr-4 text-black rounded-md' onChange={(e) => handlechange(e)} placeholder='Xstart' />
                     <input type="text" name='Xend' className='text-center bg-white py-3 mr-4 text-black rounded-md' onChange={(e) => handlechange(e)} placeholder='Xend' />
                     <input type="text" name='Error' className='text-center bg-white py-3 mt-2 mr-4 text-black rounded-md' onChange={(e) => handlechange(e)} placeholder='Error' />
-                    <br /><button type='submit' className='bg-green-400 text-black p-3 rounded mt-3'>send</button>
+                    <br />
+                    <div className='flex justify-center gap-2'>
+                    <button type='submit' className='bg-green-400 text-black p-3 rounded-md mt-3'>send</button>
+                    <button type='button' className='bg-slate-400 p-3 mt-3 rounded-md' onClick={savetodatabase}>save</button>
+                    </div>
                 </form>
 
 

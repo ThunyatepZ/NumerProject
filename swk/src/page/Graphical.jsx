@@ -7,7 +7,7 @@ import MathEquation from '../component/Boxmath';
 import Graphishow from '../component/graph';
 import Submenuroot from '../component/submenu.root';
 import BasicTable from '../component/Table';
-const test = 'http://localhost:3000/api/test'
+const test = 'http://localhost:5000/api/test'
 const math = create(all);
 
 function Graphical() {
@@ -41,18 +41,18 @@ function Graphical() {
 
     const savetodatabase = async (e) => {
         e.preventDefault();
-        if(result.status != "success"){
-            Swal.fire({
-                title: "Error!",
-                text: "you already save it",
-                icon: "error"
-            });
-        }
-        else{
             const typeform = {...form,type : type,anser : result.NewAnser,subtype : "Graphical"}
-            await axios.post(test,typeform).then((res)=>{
-                if(res.data == "Don't save"){
-                    console.log(res.data)
+            const dataobject = {
+                dataobject : typeform,
+                type : "root"
+            }
+            await axios.post(test,dataobject).then((res)=>{
+                if(res.data == "Already have it"){
+                    Swal.fire({
+                        title: "Error!",
+                        text: "We already have this data on our database",
+                        icon: "error"
+                    });
                 }
                 else{
                     Swal.fire({
@@ -62,10 +62,8 @@ function Graphical() {
                     });
                     console.log(res.data)
                 }
-
+                console.log(res.data)
             })
-                result.status = "false"
-        }
     };
 
     useEffect(()=>{

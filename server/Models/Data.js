@@ -1,13 +1,8 @@
 const mongoose = require('mongoose')
 
 const DataSchema = mongoose.Schema({
-    equation: String,
-    Xstart: String,
-    Xend: String,
-    Error: String,
-    type : String,
-    anser : String,
-    subtype : String
+    dataobject : Object,
+    type : String
 }, {timestamps: true})
 
 module.exports = mongoose.model('Graphical',DataSchema)

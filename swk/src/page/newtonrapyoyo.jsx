@@ -1,9 +1,12 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import Newton from '../CalculateFornt/newtonrapJOJO';
 import MathEquation from '../component/Boxmath';
 import Graphishow from '../component/graph';
 import Submenuroot from '../component/submenu.root';
 import BasicTable from '../component/Table';
+const test = "http://localhost:5000/api/test"
 
 
 function NEWTONRAPSON() {
@@ -30,8 +33,44 @@ function NEWTONRAPSON() {
         e.preventDefault()
         let O = await Newton(form)
         seranser(O)
+    }
+
+    const savetodatabase = async(e) =>{
+        e.preventDefault()
+        const typeform = {...form, type : "root",anser : anser.Xans,subtype : "newtonrapson"}
+        const dataobject = {
+            dataobject : typeform,
+            type : "root"
+        }
+        if(!form.equation || !form.Xstart || !form.Error){
+            Swal.fire({
+                title: "Error!",
+                text: "Please fill information",
+                icon: "error"
+            });
+            return
+        }
+        else{
+            await axios.post(test,dataobject).then((res)=>{
+                if(res.data == "Already have it"){
+                    Swal.fire({
+                        title: "Error!",
+                        text: "We already have this data on our database",
+                        icon: "error"
+                    });
+                }
+                else{
+                    Swal.fire({
+                        title: "Save success",
+                        text: "Thank for help",
+                        icon: "success"
+                    });
+                    console.log(res.data)
+                }
 
 
+        })
+        }
     }
 
 
@@ -55,7 +94,11 @@ return (
             handlechangeforequation(e) , handlechange(e)}} placeholder='f(x) = 4x-32'/><br />
         <input type="text" name='Xstart' className='text-center bg-white py-3 mt-2 mr-4 text-black rounded-md' onChange={(e)=> handlechange(e)} placeholder='X'/>
         <input type="text" name='Error' className='text-center bg-white py-3 mt-2 mr-4 text-black rounded-md' onChange={(e)=> handlechange(e)} placeholder='Error'/>
-        <br /><button type='submit' className='bg-green-400 text-black p-3 rounded mt-3'>send</button>
+        <br />
+        <div className='flex justify-center gap-2'>
+            <button type='submit' className='bg-green-400 text-black p-3 rounded mt-3'>send</button>
+            <button type='button' className='bg-slate-400 p-3 mt-3 rounded' onClick={savetodatabase}>save</button>
+        </div>
         </form>
 
 

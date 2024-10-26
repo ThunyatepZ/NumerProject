@@ -1,11 +1,16 @@
 import { all, create } from 'mathjs';
+import Swal from 'sweetalert2';
 const math = create(all)
 export default function Onepointiter({ Xstart, Error, equation }) {
     let n = 0
     let scope
 
     if (!Error || !Xstart || !equation) {
-        alert('Please input')
+        Swal.fire({
+            title: "Error!",
+            text: "Please correct all : Xstart, Xend, Error, equation",
+            icon: "error"
+        });
         return 1
     }
     else {
@@ -52,6 +57,11 @@ export default function Onepointiter({ Xstart, Error, equation }) {
             y.push(xold)
 
             if (iter >= 100) {
+                Swal.fire({
+                    title: "Good job!",
+                    text: "You clicked the button!",
+                    icon: "success"
+                });
                 return ({
                     Xans: math.round(x0, 6),
                     X: x,
@@ -67,9 +77,12 @@ export default function Onepointiter({ Xstart, Error, equation }) {
                 })
             }
 
-
         } while (iter <= 10 || error >= Error)
-
+            Swal.fire({
+                title: "Good job!",
+                text: "You clicked the button!",
+                icon: "success"
+            });
         return ({
             Xans: math.round(x0, 6),
             X: x,

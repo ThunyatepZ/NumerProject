@@ -1,6 +1,5 @@
 import { all, create } from "mathjs";
 const math = create(all);
-
 export default function GaussE(props) {
 
     try {
@@ -10,8 +9,9 @@ export default function GaussE(props) {
         let mxA = [...A];
         let mxB = [...props.matrixB];
         let B = [...mxB];
+        let tempMain = []
+        tempMain.push(JSON.parse(JSON.stringify(MAIN)))
         let x = Array.from({ length: A.length }, () => 0);
-
         for (let i = 0; i < B.length; i++) {
             for (let j = 0; j < B.length; j++) {
                 if (i > j) {
@@ -44,9 +44,9 @@ export default function GaussE(props) {
         for(let i = 0;i < x.length;i++){
             x[i] = `x${i+1}:` + x[i]
         }
-
+        // console.log(tempMain)
         return {
-            basematrix: MAIN,
+            basematrix: tempMain,
             anserA: math.round(A,6),
             anserB: B,
             anserX: x,

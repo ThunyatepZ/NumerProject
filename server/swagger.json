@@ -32,16 +32,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "equation": {
-                  "example": "any"
-                },
-                "Xstart": {
-                  "example": "any"
-                },
-                "Xend": {
-                  "example": "any"
-                },
-                "Error": {
+                "dataobject": {
                   "example": "any"
                 }
               }

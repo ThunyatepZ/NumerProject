@@ -1,8 +1,10 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { BlockMath } from 'react-katex';
+import Swal from 'sweetalert2';
 import SubmenuAGB from '../../component/subment.AGB';
 import GaussElimination from '../calculateAGB/GaussElim';
-let l = 0, i = 1;
+const test = "http://localhost:5000/api/test"
 function GaussPage() {
   const [rows, setRows] = useState(3);
   const [cols, setCols] = useState(3);
@@ -14,11 +16,10 @@ function GaussPage() {
   const matrixAcopy = matrixA.map(row => [...row]);
   const matrixBcopy = [...matrixB];
   const [normalmatrix, setnormalmatrix] = useState()
-
+  const [form,setform] = useState({})
   const object = {
     matrixA: matrixAcopy,
-    matrixB: matrixBcopy,
-    Error
+    matrixB: matrixBcopy
   };
 
   const handleerror = (e) => {
@@ -32,16 +33,27 @@ function GaussPage() {
     const isMatrixBFilled = matrixB.every(value => value !== '');
 
     if (!isMatrixAFilled) {
-      alert('please correct all matrixA');
+      Swal.fire({
+        title: "Error!",
+        text: "Please Fill MatrixA",
+        icon: "error"
+    });
       return;
     }
-
     if (!isMatrixBFilled) {
-      alert('Please fill all values in Matrix B.');
+      Swal.fire({
+        title: "Error!",
+        text: "Please Fill MatrixB",
+        icon: "error"
+    });
       return;
     }
 
-
+    Swal.fire({
+      title: "Save success",
+      text: "Thank for help",
+      icon: "success"
+  });
     let a = await GaussElimination(object);
     setanser(a);
     setnormalmatrix(matrixA)
@@ -87,9 +99,48 @@ function GaussPage() {
     setMatrixB(newMatrixB);
   };
 
+  const savetodatabase = async(e) => {
+    e.preventDefault()
+    const typeform = {...object,type : "Linear",anser : anser.anserX, subtype : "GaussElimination"}
+    const dataobject = {
+      dataobject : typeform,
+      type : "Linear"
+    }
+    const isMatrixAFilled = matrixA.every(row => row.every(value => value !== ''));
+    const isMatrixBFilled = matrixB.every(value => value !== '');
+    if(!isMatrixAFilled || !isMatrixBFilled){
+      Swal.fire({
+        title: "Error!",
+        text: "Please fill information",
+        icon: "error"
+    });
+    return
+    }
+    else{
+    await axios.post(test,dataobject).then((res) =>{
+      if(res.data == "Already have it"){
+        Swal.fire({
+          title: "Error!",
+          text: "We already have this data on our database",
+          icon: "error"
+      });
+      }
+      else{
+        Swal.fire({
+          title: "Save success",
+          text: "Thank for help",
+          icon: "success"
+      });
+      console.log(res.data)
+      }
+    })
+    }
+
+  }
+
   useEffect(() => {
-    console.log(object);
-    console.log(anser.step)
+    // console.log(object);
+    // console.log(anser.step)
   }, [anser]);
 
   return (
@@ -127,7 +178,8 @@ function GaussPage() {
         </div>
         <div className='gap-4 flex mb-4'>
           <input type="number" className='border rounded p-2 bg-white text-black' placeholder='Error 0.000001' onChange={handleerror} />
-          <button className="btn btn-primary" onClick={sendTocal}>Primary</button>
+          <button className="bg-green-400 p-3 mt-3 rounded" onClick={sendTocal}>Primary</button>
+          <button type='button' className='bg-slate-400 p-3 mt-3 rounded' onClick={savetodatabase}>save</button>
         </div>
 
         <div className="flex gap-10">

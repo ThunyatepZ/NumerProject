@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 // ดึงค่าจาก .env
-const savedata = import.meta.env.VITE_API_KEYS
+const savedata = import.meta.env.VITE_API_KEYS_TEST
 
 function Saved() {
     const [data, setdata] = useState([]);
@@ -27,7 +27,7 @@ function Saved() {
     const rows = [];
     try {
         data.map((data, index) => {
-            const x1 = createData(data.equation, data.subtype, data.anser, data.Error);
+            const x1 = createData(data.dataobject.equation, data.dataobject.subtype, data.dataobject.anser, data.dataobject.Error);
             rows.push(x1);
         });
     } catch (err) {
@@ -35,8 +35,10 @@ function Saved() {
     }
 
     return (
+        <div>
         <div className='flex justify-center items-center h-screen'>
             <div className='w-[70%]'>
+                <p>Root of equation</p>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 300 }} aria-label="simple table">
                         <TableHead>
@@ -66,6 +68,41 @@ function Saved() {
                 </TableContainer>
             </div>
         </div>
+        <div className='flex justify-center items-center h-screen'>
+            <div className='w-[70%]'>
+                <p>Linear Algeba</p>
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 300 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow className='bg-slate-500'>
+                                <TableCell>Iteration</TableCell>
+                                <TableCell align="left">type</TableCell>
+                                <TableCell align="left">anser</TableCell>
+                                <TableCell align="left">Error%</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map((row, index) => (
+                                <TableRow
+                                    key={index}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {row.eq}
+                                    </TableCell>
+                                    <a href="/Home/Rootequation"><TableCell align="left">{row.type}</TableCell></a>
+                                    <TableCell align="left"><div className='text-red-700'>{row.anser1}</div></TableCell>
+                                    <TableCell align="left">{row.Er}%</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+        </div>
+        </div>
+
+        
     );
 }
 

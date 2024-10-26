@@ -1,4 +1,4 @@
-const Graphical = require('../Models/Data')
+const Database = require('../Models/Data')
 // exports.testswagger = async(req,res)=>{
 //     try{
 //         res.send("Hello");
@@ -9,7 +9,7 @@ const Graphical = require('../Models/Data')
 
 exports.listdata = async(req,res)=>{
     try{
-        const list = await Graphical.find({type : "root"}).exec()
+        const list = await Database.find({}).exec()
         res.send(list)
     }catch(err){
         console.log(err)
@@ -18,33 +18,39 @@ exports.listdata = async(req,res)=>{
 
 exports.SendToDB = async(req,res)=>{
     try{
-        if(!req.body.equation || !req.body.Xstart || !req.body.Xend || !req.body.Error){
-            res.send("Don't save")
-        }
-        else{
-            const set = await Graphical(req.body).save()
+        if(req.body.type == "root"){
+            const checkUnique = await Database.findOne({
+                'dataobject.equation' : req.body.dataobject.equation,
+                'dataobject.Xstart' : req.body.dataobject.Xstart,
+                'dataobject.subtype' : req.body.dataobject.subtype
+            })
+            if(checkUnique){
+                return res.send("Already have it")
+            }
+            const set = await Database(req.body).save()
             res.json(set)
         }
+        if(req.body.type == "Linear"){
+            const matrixAString = JSON.stringify(req.body.dataobject.matrixA);
+            const matrixBString = JSON.stringify(req.body.dataobject.matrixB);
+            const checkUnique = await Database.findOne({
+                'dataobject.matrixA' : matrixAString,
+                'dataobject.matrixB' : matrixBString
+            })
+            if(checkUnique){
+                return res.send("Already have it")
+            }
+
+            req.body.dataobject.matrixA = matrixAString;
+            req.body.dataobject.matrixB = matrixBString;
+            
+            const set = await Database(req.body).save()
+            res.json(set)
+        }
+
+
 
     }catch(err){
         console.log(err)
     }
 }
-
-// exports.getExampledata = async(req,res)=>{
-//     try{
-//         const lisdata = await Graphical.find({}).exec()
-//         res.send(lisdata)
-//     }catch(err){
-//         console.log(err)
-//     }
-// }
-
-// exports.savedatatest = async(req,res)=>{
-//     try{
-//         const S = await Graphical(req.body).save()
-//         res.json(S)
-//     }catch(err){
-//         console.log(err)
-//     }
-// }
