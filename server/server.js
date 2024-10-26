@@ -15,9 +15,12 @@ conectDB();
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(morgan('dev'));
-app.use(cors());
+app.use(cors({
+    origin: true,
+    credentials: true,
+}))
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use('/api/',router())
 
 app.listen(process.env.SEVER_PORT, () =>
-    console.log('Server is running on port 5000'));//เปลี่ยนpath5000 to 3000เพราะ5000บนmacใช้ไม่ได้
+    console.log(`Server is running on port ${process.env.SEVER_PORT}`));
