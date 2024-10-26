@@ -32,7 +32,9 @@ export default function caljacobi(props){
         iteration++
         if(iteration >= 1000){
             console.log('out of range')
-            break
+            return({
+                anserX : "out of range"
+            })
         }
         keepXIter.push(JSON.parse(JSON.stringify(x)))
     }while(Error > 0.000001)

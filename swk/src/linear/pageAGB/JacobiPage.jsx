@@ -1,7 +1,10 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { BlockMath } from 'react-katex';
+import Swal from 'sweetalert2';
 import SubmenuAGB from '../../component/subment.AGB';
 import caljacobi from '../calculateAGB/Jacobi';
+const test = import.meta.env.VITE_API_KEYS_POST
 function Jacobipage() {
     const [rows, setRows] = useState(3);
     const [cols, setCols] = useState(3);
@@ -102,6 +105,44 @@ function Jacobipage() {
         console.log(newMatrixX1);
     };
 
+    const savetodatabase = async(e) => {
+        e.preventDefault()
+        const typeform = {...object,type : "Linear",anser : anser.anserX, subtype : "GaussElimination"}
+        const dataobject = {
+          dataobject : typeform,
+          type : "Linear"
+        }
+        const isMatrixAFilled = matrixA.every(row => row.every(value => value !== ''));
+        const isMatrixBFilled = matrixB.every(value => value !== '');
+        if(!isMatrixAFilled || !isMatrixBFilled){
+          Swal.fire({
+            title: "Error!",
+            text: "Please fill information",
+            icon: "error"
+        });
+        return
+        }
+        else{
+        await axios.post(test,dataobject).then((res) =>{
+          if(res.data == "Already have it"){
+            Swal.fire({
+              title: "Error!",
+              text: "We already have this data on our database",
+              icon: "error"
+          });
+          }
+          else{
+            Swal.fire({
+              title: "Save success",
+              text: "Thank for help",
+              icon: "success"
+          });
+          console.log(res.data)
+          }
+        })
+        }
+    
+      }
 
     useEffect(() => {
         // console.log(object);
@@ -147,7 +188,8 @@ function Jacobipage() {
                 </div>
                 <div className='gap-4 flex mb-4'>
                     <input type="number" className='border rounded p-2 bg-white text-black' placeholder='Error 0.000001' onChange={handleerror} />
-                    <button className="btn btn-primary" onClick={sendTocal}>Primary</button>
+                    <button className="bg-green-400 p-3 mt-3 rounded" onClick={sendTocal}>Primary</button>
+                    <button type='button' className='bg-slate-400 p-3 mt-3 rounded' onClick={savetodatabase}>save</button>
                 </div>
 
                 <div className="flex gap-10">

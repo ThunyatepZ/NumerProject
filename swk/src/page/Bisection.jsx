@@ -42,7 +42,16 @@ function BisectionFornt() {
                 dataobject : typeform,
                 type : "root"
             }
-            await axios.post(test,dataobject).then((res)=>{
+            if(!form.equation || !form.Xstart || !form.Xend || !form.Error){
+                Swal.fire({
+                    title: "Error!",
+                    text: "Please fill information",
+                    icon: "error"
+                });
+                return
+            }
+            else{
+                await axios.post(test,dataobject).then((res)=>{
     
                     if(res.data == "Already have it"){
                         Swal.fire({
@@ -61,6 +70,8 @@ function BisectionFornt() {
                     }
     
             })
+            }
+
     }
 
     return (

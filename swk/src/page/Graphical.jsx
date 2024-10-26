@@ -46,25 +46,36 @@ function Graphical() {
                 dataobject : typeform,
                 type : "root"
             }
-            await axios.post(test,dataobject).then((res)=>{
-                if(res.data == "Already have it"){
-                    Swal.fire({
-                        title: "Error!",
-                        text: "We already have this data on our database",
-                        icon: "error"
-                    });
-                }
-                else{
-                    Swal.fire({
-                        title: "Save success",
-                        text: "Thank for help",
-                        icon: "success"
-                    });
+            if(!form.equation || !form.Xstart || !form.Xend || !form.Error){
+                Swal.fire({
+                    title: "Error!",
+                    text: "Please fill information",
+                    icon: "error"
+                });
+                return
+            }
+            else{
+                await axios.post(test,dataobject).then((res)=>{
+                    if(res.data == "Already have it"){
+                        Swal.fire({
+                            title: "Error!",
+                            text: "We already have this data on our database",
+                            icon: "error"
+                        });
+                    }
+                    else{
+                        Swal.fire({
+                            title: "Save success",
+                            text: "Thank for help",
+                            icon: "success"
+                        });
+                        console.log(res.data)
+                    }
                     console.log(res.data)
-                }
-                console.log(res.data)
-            })
-    };
+                })
+        }
+        }
+
 
     useEffect(()=>{
         console.log(type)

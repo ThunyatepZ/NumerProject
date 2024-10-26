@@ -1,11 +1,11 @@
+import axios from 'axios';
 import { all, create } from 'mathjs';
 import React, { useEffect, useState } from 'react';
 import { BlockMath } from 'react-katex';
+import Swal from 'sweetalert2';
 import MathEquation from '../../component/Boxmath';
 import SubmenuAGB from '../../component/subment.AGB';
 import carmerRule from '../calculateAGB/Carmer';
-import axios from 'axios';
-import Swal from 'sweetalert2';
 const test = import.meta.env.VITE_API_KEYS_POST
 const math = create(all)
 
@@ -33,7 +33,12 @@ function CarmerPage() {
     const fillMatrixBTrue = matrixB.every(value => value !== '');
 
     if (!fillMatrixATrue) {
-      alert("Please fill in all values of Matrix A.");
+      Swal.fire({
+        title: "Error!",
+        text: "Please fill in all values of Matrix A.",
+        icon: "error"
+      });
+      
       return;
     }
     if (!fillMatrixBTrue) {
