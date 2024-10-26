@@ -6,7 +6,7 @@ import MathEquation from '../component/Boxmath';
 import Graphishow from '../component/graph';
 import Submenuroot from '../component/submenu.root';
 import BasicTable from '../component/Table';
-const test = "http://localhost:5000/api/test"
+const test = import.meta.env.VITE_API_KEYS_POST
 
 function Graphical() {
     const [FX,setFX] = useState("")

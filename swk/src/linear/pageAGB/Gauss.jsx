@@ -4,7 +4,7 @@ import { BlockMath } from 'react-katex';
 import Swal from 'sweetalert2';
 import SubmenuAGB from '../../component/subment.AGB';
 import GaussElimination from '../calculateAGB/GaussElim';
-const test = "http://localhost:5000/api/test"
+const test = "http://localhost:3000/api/test"
 function GaussPage() {
   const [rows, setRows] = useState(3);
   const [cols, setCols] = useState(3);

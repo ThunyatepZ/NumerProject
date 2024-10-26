@@ -5,6 +5,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { BlockMath } from 'react-katex';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 // ดึงค่าจาก .env
@@ -24,11 +25,20 @@ function Saved() {
         return { eq, type, anser1, Er };
     }
 
-    const rows = [];
+    const rows1 = [];
+    const row2 = []
     try {
         data.map((data, index) => {
-            const x1 = createData(data.dataobject.equation, data.dataobject.subtype, data.dataobject.anser, data.dataobject.Error);
-            rows.push(x1);
+            if(data.dataobject.type == "root"){
+                const x1 = createData(data.dataobject.equation, data.dataobject.subtype, data.dataobject.anser, data.dataobject.Error);
+                rows1.push(x1);
+            }
+            if(data.dataobject.type == "Linear"){
+                const x2 = createData(data.dataobject.matrixA,data.dataobject.subtype,data.dataobject.anser,0.000001)
+                row2.push(x2)
+            }
+            
+            
         });
     } catch (err) {
         console.log(err);
@@ -50,7 +60,7 @@ function Saved() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row, index) => (
+                            {rows1.map((row, index) => (
                                 <TableRow
                                     key={index}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -82,13 +92,14 @@ function Saved() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row, index) => (
+                            {row2.map((row, index) => (
                                 <TableRow
                                     key={index}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
                                     <TableCell component="th" scope="row">
-                                        {row.eq}
+                                        <BlockMath math={`${row.eq}`}/>
+                                        
                                     </TableCell>
                                     <a href="/Home/Rootequation"><TableCell align="left">{row.type}</TableCell></a>
                                     <TableCell align="left"><div className='text-red-700'>{row.anser1}</div></TableCell>
