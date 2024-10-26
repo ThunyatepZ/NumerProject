@@ -15,10 +15,7 @@ conectDB();
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(morgan('dev'));
-app.use(cors({
-    origin : true,
-    credentials : true
-}));
+app.use(cors());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use('/api/',router())
 
