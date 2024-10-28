@@ -5,6 +5,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from './App.jsx';
 import './index.css';
 
+//test
+import TEST from './linear/pageAGB/test.jsx';
+
 // Pages
 import Home from './page/Home.jsx';
 import Lobbie from './page/Lobbie.jsx';
@@ -159,6 +162,10 @@ const router = createBrowserRouter([
     {
       path : "CSimpson",
       element : <CSP/>
+    },
+    {
+      path : "test",
+      element : <TEST/>
     }
     ]
   }

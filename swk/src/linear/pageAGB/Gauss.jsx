@@ -86,8 +86,8 @@ function GaussPage() {
 
   const handleMatrixAChange = (row, col, value) => {
     setMatrixA((prevMatrixA) => {
-      const newMatrix = prevMatrixA.map((r) => [...r]); // Create a copy of the previous state
-      newMatrix[row][col] = value; // Update the specific cell
+      const newMatrix = prevMatrixA.map((r) => [...r]);
+      newMatrix[row][col] = value;
       return newMatrix;
     });
   };
