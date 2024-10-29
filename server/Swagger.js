@@ -9,7 +9,7 @@ const config = {
         description: 'DETAIL API DOCUMENTATION',
     },
     tags: [ ],
-    host: 'localhost:5000/api',
+    host: 'localhost:3000/api',
     schemes: ['http', 'https'],
 };
 

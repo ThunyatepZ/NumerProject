@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 function test() {
-
     const [rows,setrows] = useState('')
     const [cols,setcols] = useState('')
     const [matrixA,setmatrixA] = useState([])
