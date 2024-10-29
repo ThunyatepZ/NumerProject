@@ -46,12 +46,6 @@ function Jacobipage() {
             alert('Please fill all values in Matrix B.');
             return;
         }
-
-        if (rows === 2 && cols === 2) {
-            setcheckfx(2);  // Allow graph rendering when the matrix is 2x2
-        } else {
-            setcheckfx(null);  // Disable graph rendering for other sizes
-        }
         let a = await caljacobi(object);
         setanser(a);
         setmatrix(matrixA)
@@ -107,7 +101,7 @@ function Jacobipage() {
 
     const savetodatabase = async(e) => {
         e.preventDefault()
-        const typeform = {...object,type : "Linear",anser : anser.anserX, subtype : "GaussElimination"}
+        const typeform = {...object,type : "Linear",anser : anser.anserX, subtype : "jacobi"}
         const dataobject = {
           dataobject : typeform,
           type : "Linear"

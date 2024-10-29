@@ -102,7 +102,7 @@ function GaussSeidel() {
     
     const savetodatabase = async(e) => {
         e.preventDefault()
-        const typeform = {...object,type : "Linear",anser : anser.anserX, subtype : "GaussElimination"}
+        const typeform = {...object,type : "Linear",anser : anser.anserX, subtype : "GaussSeidel"}
         const dataobject = {
           dataobject : typeform,
           type : "Linear"
