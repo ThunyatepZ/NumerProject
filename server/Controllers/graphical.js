@@ -47,6 +47,10 @@ exports.SendToDB = async(req,res)=>{
             const set = await Database(req.body).save()
             res.json(set)
         }
+        if(req.body.type == "interpolation"){
+            const set = await Database(req.body).save()
+            res.json(set)
+        }
 
 
 

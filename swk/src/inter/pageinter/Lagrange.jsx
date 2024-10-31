@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Submenuinter from '../../component/submenuinter';
 import LgCal from '../calculateInter/lagrange';
+import axios from 'axios'
 import GraphforReg from '../../component/GraphforReg';
+const test = import.meta.env.VITE_API_KEYS_POST
 function Largrange() {
     const [numFields, setNumFields] = useState(1);
     const [xValues, setXValues] = useState([]);
@@ -66,6 +68,21 @@ function Largrange() {
         setanser(dd)
     };
 
+    const onsave = async() => {
+        const tempform = {
+            x : xValues,
+            y : fxValues,
+            anser : anser.ansum
+        }
+        const dataobject = {
+            dataobject : tempform,
+            type : "interpolation"
+        }
+        await axios.post(test,dataobject).then((res) => {
+            console.log(res.data)
+        })
+    }
+
     // useEffect(()=>{
     //     for(let i = 0;i < checkedIndices.length;i++){
     //         console.log(checkedIndices[i])
@@ -94,6 +111,7 @@ function Largrange() {
                         onChange={(e)=> setdata(e.target.value)}
                     />
                     <button className='bg-green-500 p-3 rounded-md' onClick={handleSubmit}>send</button>
+                    <button className='bg-gray-400 p-3 rounded-md' onClick={onsave}>Save</button>
                 </div>
 
                 {numFields > 0 && numFields <= 10 && (
