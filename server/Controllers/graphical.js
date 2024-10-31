@@ -47,13 +47,20 @@ exports.SendToDB = async(req,res)=>{
             const set = await Database(req.body).save()
             res.json(set)
         }
-        if(req.body.type == "interpolation"){
-            const set = await Database(req.body).save()
-            res.json(set)
-        }
+if (req.body.type == "interpolation") {
+    // Convert xdata and ydata to JSON strings
 
-
-
+    // Check for duplicates in the database
+    const checkUnique = await Database.findOne({
+        'dataobject.XDATA': req.body.dataobject.XDATA,
+        'dataobject.YDATA': req.body.dataobject.YDATA
+    });
+    if (checkUnique) {
+        return res.send("Already have it");
+    }
+    const set = await Database(req.body).save();
+    res.json(set);
+}
     }catch(err){
         console.log(err)
     }

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
+import GraphforReg from '../../component/GraphforReg';
 import Submenuinter from '../../component/submenuinter';
 import LgCal from '../calculateInter/lagrange';
-import axios from 'axios'
-import GraphforReg from '../../component/GraphforReg';
 const test = import.meta.env.VITE_API_KEYS_POST
 function Largrange() {
     const [numFields, setNumFields] = useState(1);
@@ -60,8 +59,8 @@ function Largrange() {
             Y[i] = fxValues[checkedIndices[i]]
         }
         if(X.length == 0 ||fxValues.length == 0 || xValues.length == 0){
-          alert("มุฮ่าๆๆๆ")
-          return 1
+            alert("มุฮ่าๆๆๆ")
+            return 1
         }
         console.log(data)
         const dd = LgCal(X,Y,data)
@@ -69,18 +68,7 @@ function Largrange() {
     };
 
     const onsave = async() => {
-        const tempform = {
-            x : xValues,
-            y : fxValues,
-            anser : anser.ansum
-        }
-        const dataobject = {
-            dataobject : tempform,
-            type : "interpolation"
-        }
-        await axios.post(test,dataobject).then((res) => {
-            console.log(res.data)
-        })
+
     }
 
     // useEffect(()=>{
