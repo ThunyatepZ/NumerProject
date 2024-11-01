@@ -17,7 +17,6 @@ app.use(cors({
     origin : true,
     credentials : true
 }));
-app.use(cors())
 
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use('/api/',router())

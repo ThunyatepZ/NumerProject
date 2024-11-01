@@ -48,9 +48,6 @@ exports.SendToDB = async(req,res)=>{
             res.json(set)
         }
 if (req.body.type == "interpolation") {
-    // Convert xdata and ydata to JSON strings
-
-    // Check for duplicates in the database
     const checkUnique = await Database.findOne({
         'dataobject.XDATA': req.body.dataobject.XDATA,
         'dataobject.YDATA': req.body.dataobject.YDATA
