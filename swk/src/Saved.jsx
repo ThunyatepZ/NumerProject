@@ -143,7 +143,7 @@ function Saved() {
                                         {row.type}
                                     </TableCell>
                                     <TableCell align="left"><div className='text-red-700'>{row.anser1}</div></TableCell>
-                                    <TableCell align="left">{row.Er}%</TableCell>
+                                    <TableCell align="left">{row.Er}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

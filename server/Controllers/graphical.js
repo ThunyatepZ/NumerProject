@@ -67,6 +67,25 @@ exports.SendToDB = async(req,res)=>{
             const set = await Database(req.body).save();
             res.json(set);
         }
+        if( req.body.type == "Regression"){
+            const matrixString = JSON.stringify(req.body.dataobject.MatrixA)
+
+            const checkUnique = await Database.findOne({
+                'dataobject.MatrixA' : { $eq: matrixString}
+            })
+            if(checkUnique){
+                return res.send("Already have it")
+            }
+
+            req.body.dataobject.MatrixA = matrixString
+
+            const set = await Database(req.body).save()
+            res.json(set)
+
+        }
+        else{
+            res.send("not found module")
+        }
     }catch(err){
         console.log(err)
     }

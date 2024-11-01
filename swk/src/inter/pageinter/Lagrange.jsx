@@ -31,10 +31,8 @@ function Largrange() {
 
     const handleCheckboxChange = (index) => {
         if (checkedIndices.includes(index)) {
-            // เอาออกถ้า index นี้ถูกเช็คอยู่แล้ว
             setCheckedIndices(checkedIndices.filter(i => i !== index));
         } else {
-            // เพิ่ม index ถ้าไม่ได้ถูกเช็ค
             setCheckedIndices([...checkedIndices, index]);
         }
     };
@@ -53,8 +51,6 @@ function Largrange() {
 
 
     const handleSubmit = (e) => {
-        // console.log('X Values:', xValues);
-        // console.log('F(x) Values:', fxValues);
         checkedIndices.sort()
         for(let i = 0;i < checkedIndices.length;i++){
             X[i] = xValues[checkedIndices[i]]

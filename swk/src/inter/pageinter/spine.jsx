@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import Submenuinter from '../../component/submenuinter';
 import Spinecal from '../calculateInter/Spine';
 import GraphforReg from '../../component/GraphforReg';
+const test = import.meta.env.VITE_API_KEYS_POST
 function spine() {
     const [anser,setanser] = useState(null) ;
     const [numFields,setNumFields] = useState(1)
@@ -66,6 +69,48 @@ function spine() {
         setshowanser(sendspineCal)
     }
 
+    const onsave = async(e) => {
+        if(!showanser.ansum){
+            Swal.fire({
+                title: "Error!",
+                text: "Please fill data",
+                icon: "error"
+            });
+        }
+        else{
+            const temp = {
+                Xdata : showanser.x,
+                Ydata : showanser.y,
+                Anser : showanser.ansum,
+                type : "Interpolation",
+                subtype : "linear spine",
+                find : anser
+            }
+            const dataobject = {
+                dataobject : temp,
+                type : "Interpolation"
+            }
+            await axios.post(test,dataobject).then((res) =>{
+                    if(res.data == "Already have it"){
+                        Swal.fire({
+                            title: "Error!",
+                            text: "We already have this data on our database",
+                            icon: "error"
+                        });
+                    }
+                    else{
+                        Swal.fire({
+                            title: "Save success",
+                            text: "Thank for help",
+                            icon: "success"
+                        });
+                        console.log(res.data)
+                    }
+            })
+        }
+       
+    }
+
     useEffect(()=>{
         // console.log(checkedIndices)
         // console.log(xvalue,yvalue)
@@ -81,7 +126,8 @@ return (
             <div className='flex justify-items-center items-center gap-2'>
                 <input type="number" className="border rounded p-2 mb-4 bg-white text-black" onChange={handlenumfillchange}/>
                 <input type="text" className="border rounded p-2 mb-4 bg-white text-black" onChange={handleanser}/>
-                <button onClick={handlesubmit}>onclick</button>
+                <button className='bg-green-500 p-3 rounded-md' onClick={handlesubmit}>onclick</button>
+                <button className='bg-gray-400 p-3 rounded-md' onClick={onsave}>save</button>
             </div>
             {numFields > 0 && numFields <= 10 && (
             <div className='bg-white p-10 rounded-lg'>

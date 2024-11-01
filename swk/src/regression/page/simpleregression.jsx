@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { BlockMath } from 'react-katex';
 import SubmenuREG from '../../component/submenuReg';
 import SIMPLE from '../cal/simpRegress';
+import Swal from 'sweetalert2';
 import REAL from '../../component/realGraphForregression';
+import axios from 'axios';
+const test = import.meta.env.VITE_API_KEYS_POST
 function simpleregression() {
     const [numFields, setNumFields] = useState(1);
     const [xValues, setXValues] = useState([]);
@@ -55,13 +58,22 @@ function simpleregression() {
     const handleSubmit = (e) => {
         // console.log('X Values:', xValues);
         // console.log('F(x) Values:', fxValues);
+        Swal.fire({
+            title: "Save success",
+            text: "Thank for help",
+            icon: "success"
+        });
         checkedIndices.sort()
         for (let i = 0; i < checkedIndices.length; i++) {
             X[i] = xValues[checkedIndices[i]]
             Y[i] = fxValues[checkedIndices[i]]
         }
         if (X.length == 0 || fxValues.length == 0 || xValues.length == 0) {
-            alert("มุฮ่าๆๆๆ")
+            Swal.fire({
+                title: "Error!",
+                text: "no data",
+                icon: "error"
+            });
             return 1
         }
         console.log(data)
@@ -70,6 +82,24 @@ function simpleregression() {
         setanserForGraph(dd)
     };
 
+    const onsave = async(e) =>{
+        const temp = {
+            x : anser.x,
+            y : anser.y,
+            MatrixA : anser.anserMxA,
+            MatrixB : anser.anserMxB,
+            Anser : anser.ansersum,
+            type : anser.mode,
+            subtype : "Simple_Regression"
+        }
+        const dataobject = { 
+            dataobject : temp,
+            type : anser.mode
+        }
+        await axios.post(test,dataobject).then((res) => {
+            console.log(res.data)
+        })
+    }
     // useEffect(()=>{
     //     for(let i = 0;i < checkedIndices.length;i++){
     //         console.log(checkedIndices[i])
@@ -98,6 +128,7 @@ function simpleregression() {
                         onChange={(e) => setdata(e.target.value)}
                     />
                     <button className='bg-green-500 p-3 rounded-md' onClick={handleSubmit}>send</button>
+                    <button className='bg-gray-400 p-3 rounded-md' onClick={onsave}>Save</button>
                 </div>
 
                 {numFields > 0 && numFields <= 10 && (
