@@ -3,6 +3,7 @@ import GraphforReg from '../../component/GraphforReg';
 import Submenuinter from '../../component/submenuinter';
 import LgCal from '../calculateInter/lagrange';
 const test = import.meta.env.VITE_API_KEYS_POST
+import axios from 'axios';
 function Largrange() {
     const [numFields, setNumFields] = useState(1);
     const [xValues, setXValues] = useState([]);
@@ -67,8 +68,25 @@ function Largrange() {
         setanser(dd)
     };
 
-    const onsave = async() => {
-
+    const onsave = async(e) => {
+        const temp = {
+            Xdata : anser.x,
+            Ydata : anser.y,
+            Anser : anser.ansum,
+            type : "Interpolation"
+        }
+        const dataobject = {
+            dataobject : temp,
+            type : "Interpolation"
+        }
+        await axios.post(test,dataobject).then((res) =>{
+            if(res.data == "Already have it"){
+                alert("Have")
+            }
+            else{
+                console.log(res.data)
+            }
+        })
     }
 
     // useEffect(()=>{
