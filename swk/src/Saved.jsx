@@ -27,6 +27,7 @@ function Saved() {
 
     const rows1 = [];
     const row2 = []
+    const row3 = []
     try {
         data.map((data, index) => {
             if(data.dataobject.type == "root"){
@@ -36,6 +37,10 @@ function Saved() {
             if(data.dataobject.type == "Linear"){
                 const x2 = createData(data.dataobject.matrixA,data.dataobject.subtype,data.dataobject.anser,0.000001)
                 row2.push(x2)
+            }
+            if(data.dataobject.type == "Interpolation"){
+                const x3 = createData(data.dataobject.Xdata + data.dataobject.Ydata,data.dataobject.Ydata,data.dataobject.subtype,data.dataobject.Anser)
+                row3.push(x3)
             }
             
             
@@ -68,7 +73,7 @@ function Saved() {
                                     <TableCell component="th" scope="row">
                                         {row.eq}
                                     </TableCell>
-                                    <a href="/Home/Rootequation"><TableCell align="left">{row.type}</TableCell></a>
+                                    <TableCell align="left">{row.type}</TableCell>
                                     <TableCell align="left"><div className='text-red-700'>{row.anser1}</div></TableCell>
                                     <TableCell align="left">{row.Er}%</TableCell>
                                 </TableRow>
@@ -98,10 +103,45 @@ function Saved() {
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
                                     <TableCell component="th" scope="row">
-                                        <BlockMath math={`${row.eq}`}/>
+                                        {row.eq}
                                         
                                     </TableCell>
-                                    <a href="/Home/Rootequation"><TableCell align="left">{row.type}</TableCell></a>
+                                    <TableCell align="left">{row.type}</TableCell>
+                                    <TableCell align="left"><div className='text-red-700'>{row.anser1}</div></TableCell>
+                                    <TableCell align="left">{row.Er}%</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+        </div>
+        <div className='flex justify-center items-center h-screen'>
+            <div className='w-[70%]'>
+                <p>Inter polation</p>
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 300 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow className='bg-slate-500'>
+                                <TableCell>DataX/DataY</TableCell>
+                                <TableCell align="left">find</TableCell>
+                                <TableCell align="left">Type</TableCell>
+                                <TableCell align="left">Anser</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {row3.map((row, index) => (
+                                <TableRow
+                                    key={index}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {row.eq}
+                                        
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        {row.type}
+                                    </TableCell>
                                     <TableCell align="left"><div className='text-red-700'>{row.anser1}</div></TableCell>
                                     <TableCell align="left">{row.Er}%</TableCell>
                                 </TableRow>

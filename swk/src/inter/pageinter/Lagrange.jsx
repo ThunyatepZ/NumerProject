@@ -70,34 +70,45 @@ function Largrange() {
     };
 
     const onsave = async(e) => {
-        const temp = {
-            Xdata : anser.x,
-            Ydata : anser.y,
-            Anser : anser.ansum,
-            type : "Interpolation",
-            subtype : "Lagrange"
+        if(!anser){
+            Swal.fire({
+                title: "Error!",
+                text: "Please fill data",
+                icon: "error"
+            });
         }
-        const dataobject = {
-            dataobject : temp,
-            type : "Interpolation"
+        else{
+            const temp = {
+                Xdata : anser.x,
+                Ydata : anser.y,
+                Anser : anser.ansum,
+                type : "Interpolation",
+                subtype : "Lagrange",
+                find : data
+            }
+            const dataobject = {
+                dataobject : temp,
+                type : "Interpolation"
+            }
+            await axios.post(test,dataobject).then((res) =>{
+                    if(res.data == "Already have it"){
+                        Swal.fire({
+                            title: "Error!",
+                            text: "We already have this data on our database",
+                            icon: "error"
+                        });
+                    }
+                    else{
+                        Swal.fire({
+                            title: "Save success",
+                            text: "Thank for help",
+                            icon: "success"
+                        });
+                        console.log(res.data)
+                    }
+            })
         }
-        await axios.post(test,dataobject).then((res) =>{
-                if(res.data == "Already have it"){
-                    Swal.fire({
-                        title: "Error!",
-                        text: "We already have this data on our database",
-                        icon: "error"
-                    });
-                }
-                else{
-                    Swal.fire({
-                        title: "Save success",
-                        text: "Thank for help",
-                        icon: "success"
-                    });
-                    console.log(res.data)
-                }
-        })
+       
     }
 
     // useEffect(()=>{
