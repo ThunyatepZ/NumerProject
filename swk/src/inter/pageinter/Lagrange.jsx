@@ -80,12 +80,8 @@ function Largrange() {
             type : "Interpolation"
         }
         await axios.post(test,dataobject).then((res) =>{
-            if(res.data == "Already have it"){
-                alert("Have")
-            }
-            else{
+
                 console.log(res.data)
-            }
         })
     }
 
