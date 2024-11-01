@@ -81,7 +81,6 @@ exports.SendToDB = async(req,res)=>{
 
             const set = await Database(req.body).save()
             res.json(set)
-
         }
         else{
             res.send("not found module")

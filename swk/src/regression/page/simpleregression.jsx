@@ -104,9 +104,25 @@ function simpleregression() {
                 dataobject : temp,
                 type : "Regression"
             }
+
             await axios.post(test,dataobject).then((res) => {
+                if(res.data == "Already have it"){
+                    Swal.fire({
+                        title: "We have this data!",
+                        text: "no data",
+                        icon: "error"
+                    });
+                }
+                else{
+                    Swal.fire({
+                        title: "Save success",
+                        text: "Thank for help",
+                        icon: "success"
+                    });
+                }
                 console.log(res.data)
             })
+
         }
        
     }
