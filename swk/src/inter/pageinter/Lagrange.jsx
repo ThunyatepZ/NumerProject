@@ -4,6 +4,7 @@ import Submenuinter from '../../component/submenuinter';
 import LgCal from '../calculateInter/lagrange';
 const test = import.meta.env.VITE_API_KEYS_POST
 import axios from 'axios';
+import Swal from 'sweetalert2';
 function Largrange() {
     const [numFields, setNumFields] = useState(1);
     const [xValues, setXValues] = useState([]);
@@ -80,8 +81,21 @@ function Largrange() {
             type : "Interpolation"
         }
         await axios.post(test,dataobject).then((res) =>{
-
-                console.log(res.data)
+                if(res.data == "Already have it"){
+                    Swal.fire({
+                        title: "Error!",
+                        text: "We already have this data on our database",
+                        icon: "error"
+                    });
+                }
+                else{
+                    Swal.fire({
+                        title: "Save success",
+                        text: "Thank for help",
+                        icon: "success"
+                    });
+                    console.log(res.data)
+                }
         })
     }
 
