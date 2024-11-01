@@ -74,7 +74,8 @@ function Largrange() {
             Xdata : anser.x,
             Ydata : anser.y,
             Anser : anser.ansum,
-            type : "Interpolation"
+            type : "Interpolation",
+            subtype : "Lagrange"
         }
         const dataobject = {
             dataobject : temp,

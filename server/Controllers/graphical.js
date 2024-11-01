@@ -54,7 +54,8 @@ exports.SendToDB = async(req,res)=>{
         
             const checkUnique = await Database.findOne({
                 'dataobject.Xdata': { $eq: xstring },
-                'dataobject.Ydata': { $eq: ystring }
+                'dataobject.Ydata': { $eq: ystring },
+                'dataobject.Anser': { $eq: req.body.dataobject.Anser}
             });
         
             if (checkUnique) {
