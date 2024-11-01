@@ -49,17 +49,20 @@ exports.SendToDB = async(req,res)=>{
             res.json(set)
         }
         if (req.body.type == "Interpolation") {
-            const xstring = JSON.stringify(req.body.dataobject.Xdata)
-            const ystring = JSON.stringify(req.body.dataobject.Ydata)
+            const xstring = JSON.stringify(req.body.dataobject.Xdata);
+            const ystring = JSON.stringify(req.body.dataobject.Ydata);
+        
             const checkUnique = await Database.findOne({
-                'dataodject.Xdata' : xstring,
-                'dataobject.Ydata' : ystring
-            })
-            if(checkUnique){
-                return res.send("Already have it")
+                'dataobject.Xdata': { $eq: xstring },
+                'dataobject.Ydata': { $eq: ystring }
+            });
+        
+            if (checkUnique) {
+                return res.send("Already have it");
             }
-            req.body.dataobject.Xdata = xstring
-            req.body.dataobject.Ydata = ystring
+        
+            req.body.dataobject.Xdata = xstring;
+            req.body.dataobject.Ydata = ystring;
             const set = await Database(req.body).save();
             res.json(set);
         }
