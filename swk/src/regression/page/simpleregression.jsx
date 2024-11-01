@@ -83,22 +83,32 @@ function simpleregression() {
     };
 
     const onsave = async(e) =>{
-        const temp = {
-            x : anser.x,
-            y : anser.y,
-            MatrixA : anser.anserMxA,
-            MatrixB : anser.anserMxB,
-            Anser : anser.ansersum,
-            type : anser.mode,
-            subtype : "Simple_Regression"
+        if(!anser){
+            Swal.fire({
+                title: "Error!",
+                text: "no data",
+                icon: "error"
+            });
         }
-        const dataobject = { 
-            dataobject : temp,
-            type : anser.mode
+        else{
+            const temp = {
+                x : anser.x,
+                y : anser.y,
+                MatrixA : anser.anserMxA,
+                MatrixB : anser.anserMxB,
+                Anser : anser.ansersum,
+                type : anser.mode,
+                subtype : "Simple_Regression"
+            }
+            const dataobject = { 
+                dataobject : temp,
+                type : "Regression"
+            }
+            await axios.post(test,dataobject).then((res) => {
+                console.log(res.data)
+            })
         }
-        await axios.post(test,dataobject).then((res) => {
-            console.log(res.data)
-        })
+       
     }
     // useEffect(()=>{
     //     for(let i = 0;i < checkedIndices.length;i++){
